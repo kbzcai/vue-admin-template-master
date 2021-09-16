@@ -66,18 +66,13 @@
     </el-table>
 
     <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
-
       <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
-
       <span slot="footer" class="dialog-footer">
-
       <el-button @click="delVisible = false">取 消</el-button>
-
       <el-button type="primary" @click="deleteRow">确 定</el-button>
-
      </span>
-
     </el-dialog>
+
     <!-- 分页组件 -->
     <el-pagination
       background
@@ -89,7 +84,6 @@
       style="text-align: center"
       layout="total,prev,pager,next,sizes,jumper"
       :total="total">
-
     </el-pagination>
 
   </div>
@@ -107,10 +101,10 @@ export default {
       delarr: [],//存放删除的数据
       multipleSelection: [],//多选的数据
 
-      repairHistoryCondition:{
+      repairHistoryCondition: {
         equipmentNo: '',
         beginTime: '',
-        endTime:''
+        endTime: ''
       },
       total: 0, // 总记录数
       current: 1, // 页码
@@ -163,7 +157,7 @@ export default {
     },
     fetchPageData: function (current, limit) {
       const _this = this
-      this.$axios.post('http://localhost:8181/mesEquipmentRepairHistory/queryByList/' + current + "/" + limit,this.repairHistoryCondition).then(function (resp) {
+      this.$axios.post('http://localhost:8181/mesEquipmentRepairHistory/queryByList/' + current + "/" + limit, this.repairHistoryCondition).then(function (resp) {
         console.log(resp.data.data)
         for (let i = 0; i < resp.data.data.length; i++) {
           let repairTime = new Date(+new Date(resp.data.data[i].repairTime) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
