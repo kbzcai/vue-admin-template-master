@@ -1,6 +1,7 @@
 <template>
   <div>
-    <el-form :inline="true" :model="productCondition" class="demo-form-inline" style="margin-top:20px;margin-left: 25px;">
+    <el-form :inline="true" :model="productCondition" class="demo-form-inline"
+             style="margin-top:20px;margin-left: 25px;">
       <el-form-item label="产品编号">
         <el-input v-model="productCondition.productNo" placeholder="请输入编号查询"></el-input>
       </el-form-item>
@@ -9,6 +10,19 @@
       </el-form-item>
       <el-form-item>
         <el-button type="danger" @click="deleteAll">批量删除</el-button>
+      </el-form-item>
+      <el-form-item style="float: right">
+        <el-upload
+          class="upload-demo"
+          action="http://localhost:8181/mesBom/importBom"
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :before-remove="beforeRemove"
+          multiple
+          :limit="3"
+          :on-exceed="handleExceed">
+          <el-button type="success">导入BOM表</el-button>
+        </el-upload>
       </el-form-item>
     </el-form>
     <el-table
@@ -21,8 +35,7 @@
       fit
       style="width: 100%;margin-top:8px;min-height:500px"
       border
-      :default-sort="{prop: 'date', order: 'descending'}"
-    >
+      :default-sort="{prop: 'date', order: 'descending'}">
       <el-table-column type="selection" width="60" align="center"></el-table-column>
       <el-table-column align="center" label="序号" width="95" type="index" :index="typeIndex">
       </el-table-column>
@@ -35,10 +48,10 @@
       </el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-<!--          <el-button-->
-<!--            size="mini"-->
-<!--            @click="handleEdit(scope.$index, scope.row)">编辑-->
-<!--          </el-button>-->
+          <!--          <el-button-->
+          <!--            size="mini"-->
+          <!--            @click="handleEdit(scope.$index, scope.row)">编辑-->
+          <!--          </el-button>-->
           <el-button
             size="mini"
             @click="handleQuery(scope.$index, scope.row)">查看产品物料
@@ -51,7 +64,6 @@
         </template>
       </el-table-column>
     </el-table>
-
     <el-dialog title="产品物料" :visible.sync="dialogTableVisible" width="80%">
       <el-table :data="productBomData">
         <el-table-column align="center" label="序号" width="95" type="index" :index="typeIndex">
@@ -102,26 +114,49 @@ export default {
       limit: 10, // 每页记录数
       pages: '0', //总页码数
 
-      productCondition:{
+      productCondition: {
         productNo: ''
       },
       tableData: [{
         id: '',
-        productNo:''
+        productNo: ''
       }],
-      productBomData:[{
-        id:'',
-        stationNo:'',
-        materialNo:'',
-        materialDesc:'',
-        productNum:''
+      productBomData: [{
+        id: '',
+        stationNo: '',
+        materialNo: '',
+        materialDesc: '',
+        productNum: ''
       }],
-      dialogTableVisible:false
+      dialogTableVisible: false
     }
   },
   methods: {
-    onSubmit(){
-      this.fetchPageData(1,10);
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`);
+    },
+    importBom() {
+      const _this = this
+      this.$axios.post('http://localhost:8181/mesBom/importBom').then(function (resp) {
+        console.log(resp.data)
+        if (resp.data == "删除成功") {
+          _this.$router.go(0);
+        } else {
+          alert("删除失败")
+        }
+      })
+    },
+    onSubmit() {
+      this.fetchPageData(1, 10);
     },
     deleteRow() {
       const _this = this
@@ -172,7 +207,7 @@ export default {
     },
     fetchPageData: function (current, limit) {
       const _this = this
-      this.$axios.post('http://localhost:8181/mesProduct/queryByList/' + current + "/" + limit,this.productCondition).then(function (resp) {
+      this.$axios.post('http://localhost:8181/mesProduct/queryByList/' + current + "/" + limit, this.productCondition).then(function (resp) {
         console.log(resp.data.data)
         _this.tableData = resp.data.data
         _this.total = resp.data.total
