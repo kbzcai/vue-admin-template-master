@@ -22,7 +22,7 @@
       @selection-change="handleSelectionChange"
       highlight-current-row
       fit
-      style="width: 100%;margin-top:8px;min-height:500px"
+      style="width: 100%;margin-top:8px;min-height:700px"
       border
       :default-sort="{prop: 'date', order: 'descending'}">
       <el-table-column type="selection" width="60" align="center"></el-table-column>
@@ -186,15 +186,15 @@ export default {
         stationNo: '',
         stationName: ''
       }],
-      materialForm:{
+      materialForm: {
         id: '',
         productNo: '',
         materialNo: '',
         materialDesc: '',
         stationName: '',
         productNum: '',
-        manufacturer:'',
-        productWeight:''
+        manufacturer: '',
+        productWeight: ''
       },
       editFormVisible: false,
       queryFormVisible: false
@@ -240,13 +240,13 @@ export default {
       this.$axios.get('http://localhost:8181/mesStation/queryAllStation').then(function (resp) {
         _this.stationForm = resp.data;
       })
-      this.$axios.get('http://localhost:8181/mesBom/queryByMaterialNo/'+row.materialNo).then(function (resp) {
+      this.$axios.get('http://localhost:8181/mesBom/queryByMaterialNo/' + row.materialNo).then(function (resp) {
         _this.materialForm = resp.data;
         console.log(_this.materialForm)
         console.log(_this.stationForm)
         for (let i = 0; i < _this.stationForm.length; i++) {
-          if(resp.data.stationNo == _this.stationForm[i].stationNo){
-            _this.materialForm.stationName=_this.stationForm[i].stationName
+          if (resp.data.stationNo == _this.stationForm[i].stationNo) {
+            _this.materialForm.stationName = _this.stationForm[i].stationName
 
             break;
           }

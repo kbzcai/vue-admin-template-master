@@ -125,6 +125,12 @@ export const constantRoutes = [
         name: 'Bom',
         component: () => import('@/views/bom/index'),
         meta: {title: '物料查询', icon: 'form'}
+      },
+      {
+        path: 'plan',
+        name: 'Plan',
+        component: () => import('@/views/plan/index'),
+        meta: {title: '计划管理', icon: 'form'}
       }
     ]
   },

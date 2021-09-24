@@ -19,9 +19,10 @@
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
           multiple
+          :on-success="refresh"
           :limit="3"
           :on-exceed="handleExceed">
-          <el-button type="success">导入BOM表</el-button>
+          <el-button type="primary">导入BOM表</el-button>
         </el-upload>
       </el-form-item>
     </el-form>
@@ -132,6 +133,9 @@ export default {
     }
   },
   methods: {
+    refresh(response, file, fileList) {
+      this.$router.go(0);
+    },
     handleRemove(file, fileList) {
       console.log(file, fileList);
     },
