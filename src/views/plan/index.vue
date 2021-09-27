@@ -12,10 +12,12 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-date-picker type="date" placeholder="选择开始日期" v-model="planCondition.beginTime"></el-date-picker>
+        <el-date-picker type="datetime" placeholder="选择开始日期" v-model="planCondition.beginTime"
+                        :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-date-picker type="date" placeholder="选择结束日期" v-model="planCondition.endTime"></el-date-picker>
+        <el-date-picker type="datetime" placeholder="选择结束日期" v-model="planCondition.endTime"
+                        :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -79,7 +81,7 @@
         width="120">
       </el-table-column>
       <el-table-column
-        prop="passNum"
+        prop="actualNum"
         label="合格数量"
         align="center"
         sortable
@@ -98,7 +100,7 @@
           </el-button>
           <el-button
             size="mini"
-            v-if="scope.row.status != '1'"
+            v-if="scope.row.planStatus != '1'"
             @click="handleFinish(scope.$index, scope.row)">一键完成
           </el-button>
         </template>
@@ -109,7 +111,7 @@
                :close-on-click-modal="false"
                class="edit-form">
       <el-form :model="insertForm" label-width="80px" ref="insertForm">
-        <el-form-item label="工位号" prop="planNo">
+        <el-form-item label="计划号" prop="planNo">
           <el-input v-model="insertForm.planNo" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="计划班次" prop="planSchedule">
@@ -118,12 +120,17 @@
             <el-option label="下午班" value="pm"></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="产品型号" prop="productNo">
+          <el-select v-model="insertForm.productNo" placeholder="选择产品">
+            <el-option v-for="(item,i) in productForm" :label="item.productNo" :value="item.productNo"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="计划数量" prop="planNum">
           <el-input v-model="insertForm.planNum" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="计划日期" prop="planDate">
           <el-date-picker v-model="insertForm.planDate" placeholder="选择计划日期" format="yyyy年MM月dd日"
-                          value-format="yyyy-MM-dd HH:mm:ss">
+                          type="datetime" :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss">
           </el-date-picker>
         </el-form-item>
       </el-form>
@@ -141,20 +148,29 @@
         <el-form-item label="计划号" prop="planNo">
           <el-input v-model="editForm.planNo" auto-complete="off" readonly></el-input>
         </el-form-item>
+
         <el-form-item label="计划班次" prop="planSchedule">
           <el-select v-model="editForm.planSchedule" placeholder="选择班次">
             <el-option label="上午班" value="am"></el-option>
             <el-option label="下午班" value="pm"></el-option>
           </el-select>
         </el-form-item>
+
         <el-form-item label="计划数量" prop="planNum">
           <el-input v-model="editForm.planNum" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="合格数量" prop="actualNum">
+          <el-input v-model="editForm.actualNum" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="手动焊接数量" prop="failNum">
+          <el-input v-model="editForm.failNum" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="计划日期" prop="planDate">
           <el-date-picker v-model="editForm.planDate" placeholder="选择计划日期" format="yyyy年MM月dd日"
                           value-format="yyyy-MM-dd HH:mm:ss">
           </el-date-picker>
         </el-form-item>
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click.native="handleCancel('editForm')">取消</el-button>
@@ -254,7 +270,9 @@ export default {
       current: 1, // 页码
       limit: 10, // 每页记录数
       pages: '0', //总页码数
-
+      productForm: [{
+        productNo: ''
+      }],
       planCondition: {
         planNo: '',
         planStatus: '',
@@ -265,14 +283,16 @@ export default {
         id: '',
         planDate: '',
         planSchedule: '',
-        planNo: '2016-05-02',
-        productNo: '王小虎2',
+        planNo: '',
+        productNo: '',
         planNum: '',
-        passNum: ''
+        actualNum: '',
+        planStatus: ''
       }
       ],
       insertForm: {
         planNo: '',
+        productNo: '',
         planDate: '',
         planNum: '',
         planSchedule: ''
@@ -281,11 +301,36 @@ export default {
         planNo: '',
         planDate: '',
         planNum: '',
+        actualNum: '',
+        failNum: '',
         planSchedule: ''
       },
+      autoFillId: '',
       editFormVisible: false,
       finishVisible: false,
-      insertFormVisible: false
+      insertFormVisible: false,
+      pickerOptions: {
+        shortcuts: [{
+          text: '今天',
+          onClick(picker) {
+            picker.$emit('pick', new Date());
+          }
+        }, {
+          text: '昨天',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24);
+            picker.$emit('pick', date);
+          }
+        }, {
+          text: '一周前',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', date);
+          }
+        }]
+      }
     }
   },
   methods: {
@@ -316,12 +361,12 @@ export default {
     },
     finishRow() {
       const _this = this
-      this.$axios.delete('http://localhost:8181/mesEquipment/deleteBySelectIds/' + this.delarr).then(function (resp) {
+      this.$axios.get('http://localhost:8181/mesPrimaryProducePlan/autoFillPlanById/' + this.autoFillId).then(function (resp) {
         console.log(resp.data)
-        if (resp.data == "删除成功") {
+        if (resp.data == "补充成功") {
           _this.$router.go(0);
         } else {
-          alert("删除失败")
+          alert(resp.data)
         }
       })
       this.delarr = [];
@@ -338,6 +383,7 @@ export default {
       this.idx = index;
       this.msg = row;//每一条数据的记录
       this.finishVisible = true;
+      this.autoFillId = row.id;
     },
     deleteAll() {
       this.delVisible = true;//显示删除弹框
@@ -348,7 +394,11 @@ export default {
       console.log(this.delarr)
     },
     handleInsert() {
+      let _this = this;
       this.insertFormVisible = true;
+      this.$axios.get('http://localhost:8181/mesProduct/queryAllProduct').then(function (resp) {
+        _this.productForm = resp.data;
+      })
     },
     handleEdit: function (index, row) {
       this.editFormVisible = true;//dialog对话窗口打开
@@ -367,7 +417,7 @@ export default {
       //dialog页面数据写入到tableData页面上
       //this.$set(tableName,tableIndex,data)
       const _this = this
-      this.$axios.post('http://localhost:8181/mesEquipment/addEquipment', this.insertForm).then(function (resp) {
+      this.$axios.post('http://localhost:8181/mesPrimaryProducePlan/addPlan', this.insertForm).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "添加成功") {
           _this.$router.go(0);
@@ -382,39 +432,15 @@ export default {
       //dialog页面数据写入到tableData页面上
       //this.$set(tableName,tableIndex,data)
       const _this = this
-      this.$axios.put('http://localhost:8181/mesEquipment/updateEquipment', this.editForm).then(function (resp) {
+      this.$axios.put('http://localhost:8181/mesPrimaryProducePlan/updatePlan', this.editForm).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "修改成功") {
           _this.$router.go(0);
         } else {
-          alert("修改失败")
+          alert(resp.data)
         }
       })
       this.editFormVisible = false;
-    },
-    reportFailInsert(forName) {
-      const _this = this
-      this.$axios.post('http://localhost:8181/mesEquipmentFaultHistory/addFaultHistory', this.reportFailForm).then(function (resp) {
-        console.log(resp.data)
-        if (resp.data == "添加成功") {
-          _this.$router.go(0);
-        } else {
-          alert("添加失败")
-        }
-      })
-      this.reportFailFormVisible = false;
-    },
-    finishFailInsert(forName) {
-      const _this = this
-      this.$axios.post('http://localhost:8181/mesEquipmentRepairHistory/addRepairHistory', this.finishFailForm).then(function (resp) {
-        console.log(resp.data)
-        if (resp.data == "添加成功") {
-          _this.$router.go(0);
-        } else {
-          alert("添加失败")
-        }
-      })
-      this.finishFailFormVisible = false;
     },
     typeIndex(index) {
       let vm = this; //处理分页数据的 index

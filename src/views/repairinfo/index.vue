@@ -6,10 +6,10 @@
         <el-input v-model="repairHistoryCondition.equipmentNo" placeholder="请输入设备号查询"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-date-picker type="date" placeholder="选择开始日期" v-model="repairHistoryCondition.beginTime"></el-date-picker>
+        <el-date-picker type="datetime" placeholder="选择开始日期" v-model="repairHistoryCondition.beginTime"  :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-date-picker type="date" placeholder="选择结束日期" v-model="repairHistoryCondition.endTime"></el-date-picker>
+        <el-date-picker type="datetime" placeholder="选择结束日期" v-model="repairHistoryCondition.endTime"  :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -96,6 +96,28 @@ export default {
   },
   data() {
     return {
+      pickerOptions: {
+        shortcuts: [{
+          text: '今天',
+          onClick(picker) {
+            picker.$emit('pick', new Date());
+          }
+        }, {
+          text: '昨天',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24);
+            picker.$emit('pick', date);
+          }
+        }, {
+          text: '一周前',
+          onClick(picker) {
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+            picker.$emit('pick', date);
+          }
+        }]
+      },
       delVisible: false,//删除提示弹框的状态
       msg: "",//记录每一条的信息，便于取id
       delarr: [],//存放删除的数据
