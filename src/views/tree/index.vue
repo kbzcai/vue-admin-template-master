@@ -43,6 +43,9 @@ export default {
   mounted() {
     this.initCharts()
   },
+  destroyed() {
+    clearInterval(this.timer);
+  },
   methods: {
     initCharts() {
       this.chart1 = echarts.init(document.getElementById('chart1'))
@@ -54,277 +57,279 @@ export default {
       this.setOptions()
     },
     setOptions() {
-      var _this = this
-      this.$axios.get('http://localhost:8181/mesPlc/query').then(function (response) {
-        console.log(response.data)
-        _this.plcData = response.data
-        //plc1
-        _this.chart1.setOption({
-          title: {
-            text: 'plc1图'
-          },
-          tooltip: {
-            trigger: 'axis'
-          },
-          legend: {
-            data: ['电流', '电压']
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-          },
-          toolbox: {
-            feature: {
-              saveAsImage: {}
-            }
-          },
-          xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: response.data[0].time
-          },
-          yAxis: {
-            type: 'value'
-          },
-          series: [
-            {
-              name: '电流',
-              type: 'line',
-              data: response.data[0].plcElectric
+      this.timer = setInterval(() => {
+        let _this = this
+        this.$axios.get('http://localhost:8181/mesPlc/query').then(function (response) {
+          console.log(response.data)
+          _this.plcData = response.data
+          //plc1
+          _this.chart1.setOption({
+            title: {
+              text: 'plc1图'
             },
-            {
-              name: '电压',
-              type: 'line',
-              data: response.data[0].plcVoltage
-            }
-          ]
-        })
-        //plc2
-        _this.chart2.setOption({
-          title: {
-            text: 'plc2图'
-          },
-          tooltip: {
-            trigger: 'axis'
-          },
-          legend: {
-            data: ['电流', '电压']
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-          },
-          toolbox: {
-            feature: {
-              saveAsImage: {}
-            }
-          },
-          xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: response.data[1].time
-          },
-          yAxis: {
-            type: 'value'
-          },
-          series: [
-            {
-              name: '电流',
-              type: 'line',
-              data: response.data[1].plcElectric
+            tooltip: {
+              trigger: 'axis'
             },
-            {
-              name: '电压',
-              type: 'line',
-              data: response.data[1].plcVoltage
-            }
-          ]
-        })
-        //plc3
-        _this.chart3.setOption({
-          title: {
-            text: 'plc3图'
-          },
-          tooltip: {
-            trigger: 'axis'
-          },
-          legend: {
-            data: ['电流', '电压']
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-          },
-          toolbox: {
-            feature: {
-              saveAsImage: {}
-            }
-          },
-          xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: response.data[2].time
-          },
-          yAxis: {
-            type: 'value'
-          },
-          series: [
-            {
-              name: '电流',
-              type: 'line',
-              data: response.data[2].plcElectric
+            legend: {
+              data: ['电流', '电压']
             },
-            {
-              name: '电压',
-              type: 'line',
-              data: response.data[2].plcVoltage
-            }
-          ]
-        })
-        //plc4
-        _this.chart4.setOption({
-          title: {
-            text: 'plc4图'
-          },
-          tooltip: {
-            trigger: 'axis'
-          },
-          legend: {
-            data: ['电流', '电压']
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-          },
-          toolbox: {
-            feature: {
-              saveAsImage: {}
-            }
-          },
-          xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: response.data[3].time
-          },
-          yAxis: {
-            type: 'value'
-          },
-          series: [
-            {
-              name: '电流',
-              type: 'line',
-              data: response.data[3].plcElectric
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
             },
-            {
-              name: '电压',
-              type: 'line',
-              data: response.data[3].plcVoltage
-            }
-          ]
-        })
-        //plc5
-        _this.chart5.setOption({
-          title: {
-            text: 'plc5图'
-          },
-          tooltip: {
-            trigger: 'axis'
-          },
-          legend: {
-            data: ['电流', '电压']
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-          },
-          toolbox: {
-            feature: {
-              saveAsImage: {}
-            }
-          },
-          xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: response.data[4].time
-          },
-          yAxis: {
-            type: 'value'
-          },
-          series: [
-            {
-              name: '电流',
-              type: 'line',
-              data: response.data[4].plcElectric
+            toolbox: {
+              feature: {
+                saveAsImage: {}
+              }
             },
-            {
-              name: '电压',
-              type: 'line',
-              data: response.data[4].plcVoltage
-            }
-          ]
-        })
-        //plc6
-        _this.chart6.setOption({
-          title: {
-            text: 'plc6图'
-          },
-          tooltip: {
-            trigger: 'axis'
-          },
-          legend: {
-            data: ['电流', '电压']
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-          },
-          toolbox: {
-            feature: {
-              saveAsImage: {}
-            }
-          },
-          xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: response.data[5].time
-          },
-          yAxis: {
-            type: 'value'
-          },
-          series: [
-            {
-              name: '电流',
-              type: 'line',
-              data: response.data[5].plcElectric
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: response.data[0].time
             },
-            {
-              name: '电压',
-              type: 'line',
-              data: response.data[5].plcVoltage
-            }
-          ]
+            yAxis: {
+              type: 'value'
+            },
+            series: [
+              {
+                name: '电流',
+                type: 'line',
+                data: response.data[0].plcElectric
+              },
+              {
+                name: '电压',
+                type: 'line',
+                data: response.data[0].plcVoltage
+              }
+            ]
+          })
+          //plc2
+          _this.chart2.setOption({
+            title: {
+              text: 'plc2图'
+            },
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data: ['电流', '电压']
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            toolbox: {
+              feature: {
+                saveAsImage: {}
+              }
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: response.data[1].time
+            },
+            yAxis: {
+              type: 'value'
+            },
+            series: [
+              {
+                name: '电流',
+                type: 'line',
+                data: response.data[1].plcElectric
+              },
+              {
+                name: '电压',
+                type: 'line',
+                data: response.data[1].plcVoltage
+              }
+            ]
+          })
+          //plc3
+          _this.chart3.setOption({
+            title: {
+              text: 'plc3图'
+            },
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data: ['电流', '电压']
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            toolbox: {
+              feature: {
+                saveAsImage: {}
+              }
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: response.data[2].time
+            },
+            yAxis: {
+              type: 'value'
+            },
+            series: [
+              {
+                name: '电流',
+                type: 'line',
+                data: response.data[2].plcElectric
+              },
+              {
+                name: '电压',
+                type: 'line',
+                data: response.data[2].plcVoltage
+              }
+            ]
+          })
+          //plc4
+          _this.chart4.setOption({
+            title: {
+              text: 'plc4图'
+            },
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data: ['电流', '电压']
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            toolbox: {
+              feature: {
+                saveAsImage: {}
+              }
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: response.data[3].time
+            },
+            yAxis: {
+              type: 'value'
+            },
+            series: [
+              {
+                name: '电流',
+                type: 'line',
+                data: response.data[3].plcElectric
+              },
+              {
+                name: '电压',
+                type: 'line',
+                data: response.data[3].plcVoltage
+              }
+            ]
+          })
+          //plc5
+          _this.chart5.setOption({
+            title: {
+              text: 'plc5图'
+            },
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data: ['电流', '电压']
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            toolbox: {
+              feature: {
+                saveAsImage: {}
+              }
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: response.data[4].time
+            },
+            yAxis: {
+              type: 'value'
+            },
+            series: [
+              {
+                name: '电流',
+                type: 'line',
+                data: response.data[4].plcElectric
+              },
+              {
+                name: '电压',
+                type: 'line',
+                data: response.data[4].plcVoltage
+              }
+            ]
+          })
+          //plc6
+          _this.chart6.setOption({
+            title: {
+              text: 'plc6图'
+            },
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data: ['电流', '电压']
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            toolbox: {
+              feature: {
+                saveAsImage: {}
+              }
+            },
+            xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: response.data[5].time
+            },
+            yAxis: {
+              type: 'value'
+            },
+            series: [
+              {
+                name: '电流',
+                type: 'line',
+                data: response.data[5].plcElectric
+              },
+              {
+                name: '电压',
+                type: 'line',
+                data: response.data[5].plcVoltage
+              }
+            ]
+          })
+          // window.addEventListener("resize", function () {
+          //   _this.chart1.resize();
+          //   _this.chart2.resize();
+          //   _this.chart3.resize();
+          //   _this.chart4.resize();
+          //   _this.chart5.resize();
+          //   _this.chart6.resize();
+          // });
         })
-        // window.addEventListener("resize", function () {
-        //   _this.chart1.resize();
-        //   _this.chart2.resize();
-        //   _this.chart3.resize();
-        //   _this.chart4.resize();
-        //   _this.chart5.resize();
-        //   _this.chart6.resize();
-        // });
-      })
+      }, 3000)
     }
   }
 }

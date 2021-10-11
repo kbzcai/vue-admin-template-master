@@ -35,8 +35,8 @@
               <i class="b_r_line"></i>
             </div>
             <div class="data">
-              <span style="display:block;margin-top:40px; font-size: xx-large;font-family: '华文仿宋'">当日工作计划</span>
-              <span style="display:block;margin-top:30px; font-size: 60px;">{{ planDay }}</span>
+              <span class="title">当日工作计划</span>
+              <span class="result">{{ planDay }}</span>
             </div>
           </div>
           <div class="box">
@@ -57,8 +57,30 @@
               <i class="b_r_line"></i>
             </div>
             <div class="data">
-              <span style="display:block;margin-top:40px; font-size: xx-large;font-family: '华文仿宋'">当周工作计划</span>
-              <span style="display:block;margin-top:30px; font-size: 60px;">{{ planWeek }}</span>
+              <span class="title">当周工作计划</span>
+              <span class="result">{{ planWeek }}</span>
+            </div>
+          </div>
+          <div class="box_right">
+            <div class="t_line_box">
+              <i class="t_l_line"></i>
+              <i class="l_t_line"></i>
+            </div>
+            <div class="t_line_box">
+              <i class="t_r_line"></i>
+              <i class="r_t_line"></i>
+            </div>
+            <div class="t_line_box">
+              <i class="l_b_line"></i>
+              <i class="b_l_line"></i>
+            </div>
+            <div class="t_line_box">
+              <i class="r_b_line"></i>
+              <i class="b_r_line"></i>
+            </div>
+            <div class="data">
+              <span class="title">当月工作计划</span>
+              <span class="result">{{ planMonth }}</span>
             </div>
           </div>
           <div class="box">
@@ -79,8 +101,8 @@
               <i class="b_r_line"></i>
             </div>
             <div class="data">
-              <span style="display:block;margin-top:40px; font-size: xx-large;font-family: '华文仿宋'">当月工作计划</span>
-              <span style="display:block;margin-top:30px; font-size: 60px;">{{ planMonth }}</span>
+              <span class="title">当日完成率</span>
+              <span class="result">{{ dayPC }}</span>
             </div>
           </div>
           <div class="box">
@@ -101,11 +123,11 @@
               <i class="b_r_line"></i>
             </div>
             <div class="data">
-              <span style="display:block;margin-top:40px; font-size: xx-large;font-family: '华文仿宋'">当日完成率</span>
-              <span style="display:block;margin-top:30px; font-size: 60px;">{{ dayPC }}</span>
+              <span class="title">当周完成率</span>
+              <span class="result">{{ weekPC }}</span>
             </div>
           </div>
-          <div class="box">
+          <div class="box_right">
             <div class="t_line_box">
               <i class="t_l_line"></i>
               <i class="l_t_line"></i>
@@ -123,72 +145,58 @@
               <i class="b_r_line"></i>
             </div>
             <div class="data">
-              <span style="display:block;margin-top:40px; font-size: xx-large;font-family: '华文仿宋'">当周完成率</span>
-              <span style="display:block;margin-top:30px; font-size: 60px;">{{ weekPC }}</span>
+              <span class="title">当月完成率</span>
+              <span class="result">{{ monthPC }}</span>
             </div>
           </div>
-          <div class="box">
-            <div class="t_line_box">
-              <i class="t_l_line"></i>
-              <i class="l_t_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="t_r_line"></i>
-              <i class="r_t_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="l_b_line"></i>
-              <i class="b_l_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="r_b_line"></i>
-              <i class="b_r_line"></i>
-            </div>
-            <div class="data">
-              <span style="display:block;margin-top:40px; font-size: xx-large;font-family: '华文仿宋'">当月完成率</span>
-              <span style="display:block;margin-top:30px; font-size: 60px;">{{ monthPC }}</span>
-            </div>
-          </div>
-          <div id="chart3" :style="{height:'400px',marginTop: '20px'}"></div>
+            <div id="chart3" :style="{height:'400px',marginTop: '20px'}"></div>
         </el-card>
       </el-col>
       <el-col :span='6'>
         <el-card shadow='never' class="custom-header">
           <div slot="header">
-            <span>设备状态</span>
+            <span>设备产量</span>
           </div>
           <slot name="content"/>
+          <div id="plc1" class="plcData">
+            <span class="plc">1-A：{{plc1NumA}}</span>
+            <span class="plc">1-B：{{plc1NumB}}</span>
+          </div>
+          <div id="plc2" class="plcData">
+            <span class="plc">2-A：{{plc2NumA}}</span>
+            <span class="plc">2-B：{{plc2NumB}}</span>
+          </div>
+          <div id="plc3" class="plcData">
+            <span class="plc">3-A：{{plc3NumA}}</span>
+            <span class="plc">3-B：{{plc3NumB}}</span>
+          </div>
+          <div id="plc4" class="plcData">
+            <span class="plc">4-A：{{plc4NumA}}</span>
+            <span class="plc">4-B：{{plc4NumB}}</span>
+          </div>
+          <div id="plc5" class="plcData">
+            <span class="plc">5-A：{{plc5NumA}}</span>
+            <span class="plc">5-B：{{plc5NumB}}</span>
+          </div>
+          <div id="plc6" class="plcData">
+            <span class="plc">6-A：{{plc6NumA}}</span>
+            <span class="plc">6-B：{{plc6NumB}}</span>
+          </div>
+          <div id="plc7" class="plcData">
+
+          </div>
+          <div id="plc8" class="plcData">
+
+          </div>
+          <div id="plc9" class="plcData">
+
+          </div>
+          <div id="plc10" class="plcData">
+
+          </div>
         </el-card>
       </el-col>
     </el-row>
-
-
-    <!--    <el-row :gutter='12' class="row-margin">-->
-    <!--      <el-col :span='6'>-->
-    <!--        <el-card shadow='never' class="custom-header">-->
-    <!--          <div slot="header">-->
-    <!--            <span>123123123</span>-->
-    <!--          </div>-->
-    <!--          <slot name="content"/>-->
-    <!--        </el-card>-->
-    <!--      </el-col>-->
-    <!--      <el-col :span='12'>-->
-    <!--        <el-card shadow='never' class="custom-header">-->
-    <!--          <div slot="header">-->
-    <!--            <span>{{title}}</span>-->
-    <!--          </div>-->
-    <!--          <slot name="content"/>-->
-    <!--        </el-card>-->
-    <!--      </el-col>-->
-    <!--      <el-col :span='6'>-->
-    <!--        <el-card shadow='never' class="custom-header">-->
-    <!--          <div slot="header">-->
-    <!--            <span>{{title}}</span>-->
-    <!--          </div>-->
-    <!--          <slot name="content"/>-->
-    <!--        </el-card>-->
-    <!--      </el-col>-->
-    <!--    </el-row>-->
   </div>
 </template>
 
@@ -209,9 +217,42 @@ export default {
       dayPC: '0%',
       weekPC: '0%',
       monthPC: '0%',
+      plc1NumA:'0',
+      plc1NumB:'0',
+      plc2NumA:'0',
+      plc2NumB:'0',
+      plc3NumA:'0',
+      plc3NumB:'0',
+      plc4NumA:'0',
+      plc4NumB:'0',
+      plc5NumA:'0',
+      plc5NumB:'0',
+      plc6NumA:'0',
+      plc6NumB:'0'
     }
   },
+  created(){
+    this.getPlcData();
+  },
   methods: {
+    getPlcData(){
+      let _this= this
+      this.$axios.get('http://localhost:8181/mesPlc/getNum').then(function (response) {
+        console.log(response.data)
+        _this.plc1NumA=response.data[0].prodNumA
+        _this.plc1NumB=response.data[0].prodNumB
+        _this.plc2NumA=response.data[1].prodNumA
+        _this.plc2NumB=response.data[1].prodNumB
+        _this.plc3NumA=response.data[2].prodNumA
+        _this.plc3NumB=response.data[2].prodNumB
+        _this.plc4NumA=response.data[3].prodNumA
+        _this.plc4NumB=response.data[3].prodNumB
+        _this.plc5NumA=response.data[4].prodNumA
+        _this.plc5NumB=response.data[4].prodNumB
+        _this.plc6NumA=response.data[5].prodNumA
+        _this.plc6NumB=response.data[5].prodNumB
+      })
+    },
     initCharts() {
       this.chart1 = echarts.init(document.getElementById('chart1'), 'dark')
       this.chart2 = echarts.init(document.getElementById('chart2'), 'dark')
@@ -403,14 +444,33 @@ export default {
       })
     }
   },
+  beforeDestroy() {
+    clearInterval(this.getPlcData())
+  },
   mounted() {
     this.initCharts()
+    setInterval(this.getPlcData,10000)
   },
 }
 </script>
 
 <style lang="scss">
-
+.plcData{
+  height: 80px;
+  width: 100%;
+  border: 2px solid #065278;
+  -moz-box-shadow: 0 -2px 7px 1px #065278 inset; /* 老的 Firefox */
+  box-shadow: 0 -2px 7px 1px #065278 inset;
+  background-color: rgba(255, 255, 255, 0);
+  margin-top: 10px;
+}
+.plc{
+  display: inline-block;
+  font-size: 40px;
+  width: 50%;
+  height: 100%;
+  line-height: 80px;
+}
 .data {
   position: relative;
   text-align: center;
@@ -421,10 +481,30 @@ export default {
   margin: 0px;
 }
 
+.data .title {
+  display: block;
+  margin-top: 40px;
+  font-size: xx-large;
+  font-family: '华文仿宋'
+}
+
+.data .result {
+  display: block;
+  margin-top: 30px;
+  font-size: 60px;
+}
+
 .box {
   width: 250px;
   height: 200px;
-  margin-right: 26px;
+  margin-right: 40px;
+  margin-top: 30px;
+  display: inline-block;
+}
+
+.box_right {
+  width: 250px;
+  height: 200px;
   margin-top: 30px;
   display: inline-block;
 }
