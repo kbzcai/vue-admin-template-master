@@ -55,6 +55,32 @@ export const constantRoutes = [
     }]
   },
   {
+    path: '/form',
+    component: Layout,
+    name: 'Form',
+    meta: {title: '物料管理', icon: 'el-icon-s-help'},
+    children: [
+      {
+        path: 'product',
+        name: 'Product',
+        component: () => import('@/views/form/index'),
+        meta: {title: '产品查询', icon: 'form'}
+      },
+      {
+        path: 'bom',
+        name: 'Bom',
+        component: () => import('@/views/bom/index'),
+        meta: {title: '物料查询', icon: 'form'}
+      },
+      {
+        path: 'plan',
+        name: 'Plan',
+        component: () => import('@/views/plan/index'),
+        meta: {title: '计划管理', icon: 'form'}
+      }
+    ]
+  },
+  {
     path: '/equipment',
     component: Layout,
     redirect: '/equipment/equipmentinfo',
@@ -84,56 +110,37 @@ export const constantRoutes = [
         name: 'stationinfo',
         component: () => import('@/views/stationinfo/index'),
         meta: {title: '工位信息', icon: 'table'}
-      }
-    ]
-  },
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: {title: 'Example', icon: 'el-icon-s-help'},
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: {title: 'Table', icon: 'table'}
       },
       {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
-        meta: {title: 'Tree', icon: 'tree'}
+        meta: {title: '设备状态', icon: 'table'}
       }
     ]
   },
-  {
-    path: '/form',
-    component: Layout,
-    name: 'Form',
-    meta: {title: '物料管理', icon: 'el-icon-s-help'},
-    children: [
-      {
-        path: 'product',
-        name: 'Product',
-        component: () => import('@/views/form/index'),
-        meta: {title: '产品查询', icon: 'form'}
-      },
-      {
-        path: 'bom',
-        name: 'Bom',
-        component: () => import('@/views/bom/index'),
-        meta: {title: '物料查询', icon: 'form'}
-      },
-      {
-        path: 'plan',
-        name: 'Plan',
-        component: () => import('@/views/plan/index'),
-        meta: {title: '计划管理', icon: 'form'}
-      }
-    ]
-  },
+  // {
+  //   path: '/example',
+  //   component: Layout,
+  //   redirect: '/example/table',
+  //   name: 'Example',
+  //   meta: {title: 'Example', icon: 'el-icon-s-help'},
+  //   children: [
+  //     {
+  //       path: 'table',
+  //       name: 'Table',
+  //       component: () => import('@/views/table/index'),
+  //       meta: {title: 'Table', icon: 'table'}
+  //     },
+  //     {
+  //       path: 'tree',
+  //       name: 'Tree',
+  //       component: () => import('@/views/tree/index'),
+  //       meta: {title: 'Tree', icon: 'tree'}
+  //     }
+  //   ]
+  // },
+
   // 404 page must be placed at the end !!!
   {path: '*', redirect: '/404', hidden: true}
 ]
