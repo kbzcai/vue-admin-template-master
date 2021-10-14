@@ -58,6 +58,10 @@
         align="center"
         sortable
         width="120">
+        <template slot-scope="scope">
+          <span v-if="scope.row.planSchedule == 'am'">上午班</span>
+          <span v-if="scope.row.planSchedule == 'pm'">下午班</span>
+        </template>
       </el-table-column>
       <el-table-column
         prop="planNo"
@@ -91,17 +95,21 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="handleEdit(scope.$index, scope.row)">编辑
+            @click="handleQuery(scope.$index, scope.row)">查看所需物料
           </el-button>
           <el-button
             size="mini"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)">删除
+            @click="handleEdit(scope.$index, scope.row)">编辑
           </el-button>
           <el-button
             size="mini"
             v-if="scope.row.planStatus != '1'"
             @click="handleFinish(scope.$index, scope.row)">一键完成
+          </el-button>
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)">删除
           </el-button>
         </template>
       </el-table-column>
@@ -155,7 +163,6 @@
             <el-option label="下午班" value="pm"></el-option>
           </el-select>
         </el-form-item>
-
         <el-form-item label="计划数量" prop="planNum">
           <el-input v-model="editForm.planNum" auto-complete="off"></el-input>
         </el-form-item>
@@ -178,51 +185,16 @@
       </div>
     </el-dialog>
 
-    <!--    <el-dialog title="故障报修"-->
-    <!--               :visible.sync="reportFailFormVisible"-->
-    <!--               :close-on-click-modal="false"-->
-    <!--               class="edit-form">-->
-    <!--      <el-form :model="reportFailForm" label-width="80px" ref="reportFailForm">-->
-    <!--        <el-form-item label="设备号" prop="equipmentNo">-->
-    <!--          <el-input v-model="reportFailForm.equipmentNo" auto-complete="off" readonly="true"></el-input>-->
-    <!--        </el-form-item>-->
-    <!--        <el-form-item label="故障原因" prop="faultReason">-->
-    <!--          <el-input v-model="reportFailForm.faultReason" auto-complete="off"></el-input>-->
-    <!--        </el-form-item>-->
-    <!--        <el-form-item label="故障时间" prop="failStartTime">-->
-    <!--          <el-date-picker v-model="reportFailForm.faultStartTime" placeholder="选择故障时间" format="yyyy年MM月dd日"-->
-    <!--                          value-format="yyyy-MM-dd HH:mm:ss">-->
-    <!--          </el-date-picker>-->
-    <!--        </el-form-item>-->
-    <!--      </el-form>-->
-    <!--      <div slot="footer" class="dialog-footer">-->
-    <!--        <el-button @click.native="handleCancel('reportFailForm')">取消</el-button>-->
-    <!--        <el-button type="primary" @click.native="reportFailInsert('reportFailForm')">确认</el-button>-->
-    <!--      </div>-->
-    <!--    </el-dialog>-->
-
-    <!--    <el-dialog title="维修内容"-->
-    <!--               :visible.sync="finishFailFormVisible"-->
-    <!--               :close-on-click-modal="false"-->
-    <!--               class="edit-form">-->
-    <!--      <el-form :model="finishFailForm" label-width="80px" ref="finishFailForm">-->
-    <!--        <el-form-item label="设备号" prop="equipmentNo">-->
-    <!--          <el-input v-model="finishFailForm.equipmentNo" auto-complete="off" readonly="true"></el-input>-->
-    <!--        </el-form-item>-->
-    <!--        <el-form-item label="维修内容" prop="repairContent">-->
-    <!--          <el-input v-model="finishFailForm.repairContent" auto-complete="off"></el-input>-->
-    <!--        </el-form-item>-->
-    <!--        <el-form-item label="完成时间" prop="repairTime">-->
-    <!--          <el-date-picker v-model="finishFailForm.repairTime" placeholder="选择维修完成时间" format="yyyy年MM月dd日"-->
-    <!--                          value-format="yyyy-MM-dd HH:mm:ss">-->
-    <!--          </el-date-picker>-->
-    <!--        </el-form-item>-->
-    <!--      </el-form>-->
-    <!--      <div slot="footer" class="dialog-footer">-->
-    <!--        <el-button @click.native="handleCancel('finishFailForm')">取消</el-button>-->
-    <!--        <el-button type="primary" @click.native="finishFailInsert('finishFailForm')">确认</el-button>-->
-    <!--      </div>-->
-    <!--    </el-dialog>-->
+    <el-dialog title="物料所需数量" :visible.sync="dialogTableVisible" width="80%">
+      <el-table :data="productBomData">
+        <el-table-column align="center" label="序号" width="95" type="index" :index="typeIndex">
+        </el-table-column>
+        <el-table-column align="center" property="stationNo" label="工位号" width="150"></el-table-column>
+        <el-table-column align="center" property="materialNo" label="物料编号" width="250"></el-table-column>
+        <el-table-column align="center" property="materialDesc" label="物料描述" width="350"></el-table-column>
+        <el-table-column align="center" property="productNum" label="数量(件)" width="100"></el-table-column>
+      </el-table>
+    </el-dialog>
 
     <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
       <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
@@ -251,6 +223,7 @@
       layout="total,prev,pager,next,sizes,jumper"
       :total="total">
     </el-pagination>
+
   </div>
 </template>
 
@@ -305,10 +278,18 @@ export default {
         failNum: '',
         planSchedule: ''
       },
+      productBomData: [{
+        id: '',
+        stationNo: '',
+        materialNo: '',
+        materialDesc: '',
+        productNum: ''
+      }],
       autoFillId: '',
       editFormVisible: false,
       finishVisible: false,
       insertFormVisible: false,
+      dialogTableVisible: false,
       pickerOptions: {
         shortcuts: [{
           text: '今天',
@@ -346,9 +327,20 @@ export default {
         return '故障'
       }
     },
+    handleQuery: function (index, row) {
+      this.dialogTableVisible = true;//dialog对话窗口打开
+      const _this = this
+      this.$axios.get('http://localhost:8181/mesBom/queryByProductNo/' + row.productNo).then(function (resp) {
+        console.log(resp.data)
+        for (let i = 0; i < resp.data.length; i++) {
+          resp.data[i].productNum = resp.data[i].productNum * row.planNum
+        }
+        _this.productBomData = resp.data
+      })
+    },
     deleteRow() {
       const _this = this
-      this.$axios.delete('http://localhost:8181/mesEquipment/deleteBySelectIds/' + this.delarr).then(function (resp) {
+      this.$axios.delete('http://localhost:8181/mesPrimaryProducePlan/deleteBySelectIds/' + this.delarr).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "删除成功") {
           _this.$router.go(0);

@@ -183,16 +183,20 @@
             <span class="plc">6-B：{{plc6NumB}}</span>
           </div>
           <div id="plc7" class="plcData">
-
+            <span class="plc">7-A：{{plc7NumA}}</span>
+            <span class="plc">7-B：{{plc7NumB}}</span>
           </div>
           <div id="plc8" class="plcData">
-
+            <span class="plc">8-A：{{plc8NumA}}</span>
+            <span class="plc">8-B：{{plc8NumB}}</span>
           </div>
           <div id="plc9" class="plcData">
-
+            <span class="plc">9-A：{{plc9NumA}}</span>
+            <span class="plc">9-B：{{plc9NumB}}</span>
           </div>
           <div id="plc10" class="plcData">
-
+            <span class="plc">10-A：{{plc10NumA}}</span>
+            <span class="plc">10-B：{{plc10NumB}}</span>
           </div>
         </el-card>
       </el-col>
@@ -228,7 +232,15 @@ export default {
       plc5NumA:'0',
       plc5NumB:'0',
       plc6NumA:'0',
-      plc6NumB:'0'
+      plc6NumB:'0',
+      plc7NumA:'0',
+      plc7NumB:'0',
+      plc8NumA:'0',
+      plc8NumB:'0',
+      plc9NumA:'0',
+      plc9NumB:'0',
+      plc10NumA:'0',
+      plc10NumB:'0'
     }
   },
   created(){
@@ -251,6 +263,14 @@ export default {
         _this.plc5NumB=response.data[4].prodNumB
         _this.plc6NumA=response.data[5].prodNumA
         _this.plc6NumB=response.data[5].prodNumB
+        _this.plc7NumA=response.data[6].prodNumA
+        _this.plc7NumB=response.data[6].prodNumB
+        _this.plc8NumA=response.data[7].prodNumA
+        _this.plc8NumB=response.data[7].prodNumB
+        _this.plc9NumA=response.data[8].prodNumA
+        _this.plc9NumB=response.data[8].prodNumB
+        _this.plc10NumA=response.data[9].prodNumA
+        _this.plc10NumB=response.data[9].prodNumB
       })
     },
     initCharts() {
@@ -444,12 +464,12 @@ export default {
       })
     }
   },
-  beforeDestroy() {
-    clearInterval(this.getPlcData())
+  destroyed() {
+    clearInterval(this.timer)
   },
   mounted() {
     this.initCharts()
-    setInterval(this.getPlcData,10000)
+    this.timer=setInterval(this.getPlcData,10000)
   },
 }
 </script>
@@ -466,7 +486,7 @@ export default {
 }
 .plc{
   display: inline-block;
-  font-size: 40px;
+  font-size: 35px;
   width: 50%;
   height: 100%;
   line-height: 80px;
