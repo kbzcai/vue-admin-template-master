@@ -1,5 +1,8 @@
 <template>
   <div>
+    <span style="margin-top:20px;margin-left: 25px;font-size: 40px;">正在生产的计划：{{ this.nowPlanNo }}</span>
+    <span style="margin-top:20px;margin-left: 25px;font-size: 40px;">合格数：{{ this.nowPlanActualNum }}</span>
+    <span style="margin-top:20px;margin-left: 25px;font-size: 40px;">手动焊接数：{{ this.nowPlanFailNum }}</span>
     <el-form :inline="true" :model="planCondition" class="demo-form-inline"
              style="margin-top:20px;margin-left: 25px;">
       <el-form-item label="计划号">
@@ -100,6 +103,11 @@
           <el-button
             size="mini"
             @click="handleEdit(scope.$index, scope.row)">编辑
+          </el-button>
+          <el-button
+            size="mini"
+            v-if="scope.row.status != '1'&&scope.row.planStatus != '1'"
+            @click="startPlan(scope.$index, scope.row)">开始生产
           </el-button>
           <el-button
             size="mini"
@@ -232,13 +240,18 @@ export default {
   created() {
     this.fetchPageData(1, 10);
   },
+  mounted() {
+    this.getProductPlan();
+  },
   data() {
     return {
       delVisible: false,//删除提示弹框的状态
       msg: "",//记录每一条的信息，便于取id
       delarr: [],//存放删除的数据
       multipleSelection: [],//多选的数据
-
+      nowPlanNo: '',//正在生产的计划号
+      nowPlanActualNum: '',//正在生产的计划的合格数量
+      nowPlanFailNum: '',//正在生产的计划的手动焊接数量
       total: 0, // 总记录数
       current: 1, // 页码
       limit: 10, // 每页记录数
@@ -260,9 +273,9 @@ export default {
         productNo: '',
         planNum: '',
         actualNum: '',
-        planStatus: ''
-      }
-      ],
+        planStatus: '',
+        status: ''
+      }],
       insertForm: {
         planNo: '',
         productNo: '',
@@ -318,13 +331,33 @@ export default {
     onSubmit() {
       this.fetchPageData(1, 10)
     },
-    stateFormat(row, column) {
-      if (row.status == '1') {
-        return '运行中'
-      } else if (row.status == '0') {
-        return '等待中'
+    getProductPlan() {
+      let _this = this
+      this.$axios.get('http://localhost:8181/mesPrimaryProducePlan/getProductPlan').then(function (resp) {
+        console.log(resp.data)
+        if (resp.data.mes == '查询成功') {
+          _this.nowPlanNo = resp.data.mesPrimaryProducePlan.planNo;
+          _this.nowPlanActualNum = resp.data.mesPrimaryProducePlan.actualNum;
+          _this.nowPlanFailNum = resp.data.mesPrimaryProducePlan.failNum;
+        }
+      })
+    },
+    startPlan: function (index, row) {
+      let _this = this;
+      if (this.nowPlanNo != '') {
+        this.$message({
+          type: "error",
+          message: '已经有正在生产的计划了，请完成后再继续该计划！',
+        });
       } else {
-        return '故障'
+        this.$axios.get('http://localhost:8181/mesPrimaryProducePlan/startPlanById/' + row.id).then(function (resp) {
+          console.log(resp.data)
+          if (resp.data == '开始生产') {
+            _this.$router.go(0);
+          } else {
+            alert(resp.data);
+          }
+        })
       }
     },
     handleQuery: function (index, row) {

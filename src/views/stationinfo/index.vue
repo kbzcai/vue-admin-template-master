@@ -72,6 +72,7 @@
         </template>
       </el-table-column>
     </el-table>
+
     <el-dialog title="添加工位信息"
                :visible.sync="insertFormVisible"
                :close-on-click-modal="false"
