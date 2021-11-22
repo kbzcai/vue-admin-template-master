@@ -107,7 +107,7 @@
           <el-button
             size="mini"
             v-if="scope.row.status != '1'&&scope.row.planStatus != '1'"
-            @click="startPlan(scope.$index, scope.row)">开始生产
+            @click="startPlan(scope.$index, scope.row)">切换计划
           </el-button>
           <el-button
             size="mini"
@@ -164,7 +164,6 @@
         <el-form-item label="计划号" prop="planNo">
           <el-input v-model="editForm.planNo" auto-complete="off" readonly></el-input>
         </el-form-item>
-
         <el-form-item label="计划班次" prop="planSchedule">
           <el-select v-model="editForm.planSchedule" placeholder="选择班次">
             <el-option label="上午班" value="am"></el-option>
@@ -185,7 +184,6 @@
                           value-format="yyyy-MM-dd HH:mm:ss">
           </el-date-picker>
         </el-form-item>
-
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click.native="handleCancel('editForm')">取消</el-button>
@@ -195,8 +193,7 @@
 
     <el-dialog title="物料所需数量" :visible.sync="dialogTableVisible" width="80%">
       <el-table :data="productBomData">
-        <el-table-column align="center" label="序号" width="95" type="index" :index="typeIndex">
-        </el-table-column>
+        <el-table-column align="center" label="序号" width="95" type="index" :index="typeIndex"></el-table-column>
         <el-table-column align="center" property="stationNo" label="工位号" width="150"></el-table-column>
         <el-table-column align="center" property="materialNo" label="物料编号" width="250"></el-table-column>
         <el-table-column align="center" property="materialDesc" label="物料描述" width="350"></el-table-column>
@@ -209,7 +206,7 @@
       <span slot="footer" class="dialog-footer">
       <el-button @click="delVisible = false">取 消</el-button>
       <el-button type="primary" @click="deleteRow">确 定</el-button>
-     </span>
+      </span>
     </el-dialog>
 
     <el-dialog title="提示" :visible.sync="finishVisible" width="300px" center>
@@ -239,9 +236,13 @@
 export default {
   created() {
     this.fetchPageData(1, 10);
+    this.getProductPlan();
+  },
+  destroyed() {
+    clearInterval(this.timer)
   },
   mounted() {
-    this.getProductPlan();
+    this.timer = setInterval(this.getProductPlan, 10000)
   },
   data() {
     return {

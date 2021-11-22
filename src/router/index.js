@@ -58,25 +58,25 @@ export const constantRoutes = [
     path: '/form',
     component: Layout,
     name: 'Form',
-    meta: {title: '物料管理', icon: 'el-icon-s-help'},
+    meta: {title: '物料管理', icon: 'el-icon-s-home'},
     children: [
       {
         path: 'product',
         name: 'Product',
         component: () => import('@/views/form/index'),
-        meta: {title: '产品查询', icon: 'form'}
+        meta: {title: '产品查询', icon: 'el-icon-search'}
       },
       {
         path: 'bom',
         name: 'Bom',
         component: () => import('@/views/bom/index'),
-        meta: {title: '物料查询', icon: 'form'}
+        meta: {title: '物料查询', icon: 'el-icon-search'}
       },
       {
         path: 'plan',
         name: 'Plan',
         component: () => import('@/views/plan/index'),
-        meta: {title: '计划管理', icon: 'form'}
+        meta: {title: '计划管理', icon: 'el-icon-s-order'}
       }
     ]
   },
@@ -85,37 +85,58 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/equipment/equipmentinfo',
     name: 'equipment',
-    meta: {title: '设备管理', icon: 'el-icon-s-help'},
+    meta: {title: '设备管理', icon: 'el-icon-s-cooperation'},
     children: [
       {
         path: 'equipmentinfo',
         name: 'Equipmentinfo',
         component: () => import('@/views/equipmentinfo/index'),
-        meta: {title: '设备信息', icon: 'table'}
+        meta: {title: '设备信息', icon: 'el-icon-s-claim'}
       },
       {
         path: 'faultinfo',
         name: 'Faultinfo',
         component: () => import('@/views/faultinfo/index'),
-        meta: {title: '故障信息', icon: 'table'}
+        meta: {title: '故障信息', icon: 'el-icon-s-claim'}
       },
       {
         path: 'repairinfo',
         name: 'repairinfo',
         component: () => import('@/views/repairinfo/index'),
-        meta: {title: '维修信息', icon: 'table'}
+        meta: {title: '维修信息', icon: 'el-icon-s-claim'}
       },
       {
         path: 'stationinfo',
         name: 'stationinfo',
         component: () => import('@/views/stationinfo/index'),
-        meta: {title: '工位信息', icon: 'table'}
+        meta: {title: '工位信息', icon: 'el-icon-s-claim'}
       },
       {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
-        meta: {title: '设备状态', icon: 'table'}
+        meta: {title: '设备状态', icon: 'el-icon-s-data'}
+      }
+    ]
+  },
+  {
+    path: '/station',
+    component: Layout,
+    redirect: '/station/stationinfo',
+    name: 'station',
+    meta: {title: '工作线状态', icon: 'el-icon-s-platform'},
+    children: [
+      {
+        path: 'stationonetstatus',
+        name: 'stationonetstatus',
+        component: () => import('@/views/stationonestatus/index'),
+        meta: {title: '线路1', icon: 'el-icon-s-flag'}
+      },
+      {
+        path: 'stationtwotstatus',
+        name: 'stationtwotstatus',
+        component: () => import('@/views/stationtwostatus/index'),
+        meta: {title: '线路2', icon: 'el-icon-s-flag'}
       }
     ]
   },
