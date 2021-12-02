@@ -158,45 +158,21 @@
             <span>设备产量</span>
           </div>
           <slot name="content"/>
-          <div id="plc1" class="plcData">
-            <span class="plc">1-A：{{plc1NumA}}</span>
-            <span class="plc">1-B：{{plc1NumB}}</span>
-          </div>
-          <div id="plc2" class="plcData">
-            <span class="plc">2-A：{{plc2NumA}}</span>
-            <span class="plc">2-B：{{plc2NumB}}</span>
-          </div>
-          <div id="plc3" class="plcData">
-            <span class="plc">3-A：{{plc3NumA}}</span>
-            <span class="plc">3-B：{{plc3NumB}}</span>
-          </div>
-          <div id="plc4" class="plcData">
-            <span class="plc">4-A：{{plc4NumA}}</span>
-            <span class="plc">4-B：{{plc4NumB}}</span>
-          </div>
-          <div id="plc5" class="plcData">
-            <span class="plc">5-A：{{plc5NumA}}</span>
-            <span class="plc">5-B：{{plc5NumB}}</span>
-          </div>
-          <div id="plc6" class="plcData">
-            <span class="plc">6-A：{{plc6NumA}}</span>
-            <span class="plc">6-B：{{plc6NumB}}</span>
-          </div>
           <div id="plc7" class="plcData">
-            <span class="plc">7-A：{{plc7NumA}}</span>
-            <span class="plc">7-B：{{plc7NumB}}</span>
+            <span class="plc">1-A：{{plc7NumA}}</span>
+            <span class="plc">1-B：{{plc7NumB}}</span>
           </div>
           <div id="plc8" class="plcData">
-            <span class="plc">8-A：{{plc8NumA}}</span>
-            <span class="plc">8-B：{{plc8NumB}}</span>
+            <span class="plc">2-A：{{plc8NumA}}</span>
+            <span class="plc">2-B：{{plc8NumB}}</span>
           </div>
           <div id="plc9" class="plcData">
-            <span class="plc">9-A：{{plc9NumA}}</span>
-            <span class="plc">9-B：{{plc9NumB}}</span>
+            <span class="plc">3-A：{{plc9NumA}}</span>
+            <span class="plc">3-B：{{plc9NumB}}</span>
           </div>
           <div id="plc10" class="plcData">
-            <span class="plc">10-A：{{plc10NumA}}</span>
-            <span class="plc">10-B：{{plc10NumB}}</span>
+            <span class="plc">4-A：{{plc10NumA}}</span>
+            <span class="plc">4-B：{{plc10NumB}}</span>
           </div>
         </el-card>
       </el-col>
