@@ -59,7 +59,6 @@
         <span style="margin-right:20px;">用户名: editor</span>
         <span> 密码: 6位以下任意</span>
       </div>
-
     </el-form>
   </div>
 </template>
@@ -238,6 +237,8 @@ $light_gray: #eee;
       text-align: center;
       font-weight: bold;
     }
+
+
   }
 
   .show-pwd {
