@@ -21,8 +21,8 @@
       </div>
       <div class="data">
         <span class="title">工作站7</span>
-        <span class="result">A工位:{{ state7a }}</span>
-        <span class="result">B工位:{{ state7b }}</span>
+        <span class="result">{{ state7a == '1' ? '运行中':state7a == '2'?'待机':state7a == '3'?'报警':'错误'}}</span>
+        <span class="result">{{ state7b == '1' ? '运行中':state7b == '2'?'待机':state7b == '3'?'报警':'错误'}}</span>
       </div>
     </div>
     <div class="box">
@@ -44,8 +44,8 @@
       </div>
       <div class="data">
         <span class="title">工作站8</span>
-        <span class="result">A工位:{{ state8a }}</span>
-        <span class="result">B工位:{{ state8b }}</span>
+        <span class="result">{{ state8a == '1' ? '运行中':state8a == '2'?'待机':state8a == '3'?'报警':'错误'}}</span>
+        <span class="result">{{ state8b == '1' ? '运行中':state8b == '2'?'待机':state8b == '3'?'报警':'错误'}}</span>
       </div>
     </div>
     <div class="box">
@@ -67,8 +67,8 @@
       </div>
       <div class="data">
         <span class="title">工作站9</span>
-        <span class="result">A工位:{{ state9a }}</span>
-        <span class="result">B工位:{{ state9b }}</span>
+          <span class="result">{{ state9a == '1' ? '运行中':state9a == '2'?'待机':state9a == '3'?'报警':'错误'}}</span>
+          <span class="result">{{ state9b == '1' ? '运行中':state9b == '2'?'待机':state9b == '3'?'报警':'错误'}}</span>
       </div>
     </div>
     <div class="box">
@@ -90,8 +90,8 @@
       </div>
       <div class="data">
         <span class="title">工作站10</span>
-        <span class="result">A工位:{{ state10a }}</span>
-        <span class="result">B工位:{{ state10b }}</span>
+        <span class="result">{{ state10a == '1' ? '运行中':state10a == '2'?'待机':state10a == '3'?'报警':'错误'}}</span>
+        <span class="result">{{ state10b == '1' ? '运行中':state10b == '2'?'待机':state10b == '3'?'报警':'错误'}}</span>
       </div>
     </div>
   </div>
@@ -108,14 +108,14 @@ export default {
   },
   data() {
     return {
-      state7a:'0',
-      state7b:'0',
-      state8a:'0',
-      state8b:'0',
-      state9a:'0',
-      state9b:'0',
-      state10a:'0',
-      state10b:'0',
+      state7a: '',
+      state7b: '',
+      state8a: '',
+      state8b: '',
+      state9a: '',
+      state9b: '',
+      state10a: '',
+      state10b: '',
     }
   },
   methods: {
@@ -132,6 +132,7 @@ export default {
         _this.state10a = response.data[9].stateA
         _this.state10b = response.data[9].stateB
       })
+      console.log(this.state9a)
     }
   }
 }
@@ -161,6 +162,7 @@ export default {
   font-size: 55px;
   font-family: '华文仿宋'
 }
+
 .box {
   width: 16%;
   margin-left: 6.5%;

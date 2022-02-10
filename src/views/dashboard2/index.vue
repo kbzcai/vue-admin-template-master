@@ -216,13 +216,53 @@ export default {
       plc9NumA:'0',
       plc9NumB:'0',
       plc10NumA:'0',
-      plc10NumB:'0'
+      plc10NumB:'0',
+      state7a: '',
+      state7b: '',
+      state8a: '',
+      state8b: '',
+      state9a: '',
+      state9b: '',
+      state10a: '',
+      state10b: '',
     }
   },
   created(){
     this.getPlcData();
   },
   methods: {
+    open1() {
+      let msg=""
+      if(this.state7a == '3'){
+        msg+="1-A "
+      }
+      if(this.state7b == '3'){
+        msg+="1-B "
+      }
+      if(this.state8a == '3'){
+        msg+="2-A "
+      }
+      if(this.state8b == '3'){
+        msg+="2-B "
+      }
+      if(this.state9a == '3'){
+        msg+="3-A "
+      }
+      if(this.state9b == '3'){
+        msg+="3-B "
+      }
+      if(this.state10a == '3'){
+        msg+="4-A "
+      }
+      if(this.state10b == '3'){
+        msg+="4-B "
+      }
+      this.$notify({
+        title: '提示',
+        message: msg == ""?'暂无报警信息':msg+'报警',
+        type: 'warning'
+      });
+    },
     getPlcData(){
       let _this= this
       this.$axios.get('http://localhost:8181/mesPlc/getNum').then(function (response) {
@@ -248,6 +288,18 @@ export default {
         _this.plc10NumA=response.data[9].prodNumA
         _this.plc10NumB=response.data[9].prodNumB
       })
+      this.$axios.get('http://localhost:8181/mesPlc/getStates').then(function (response) {
+        console.log(response.data)
+        _this.state7a = response.data[6].stateA
+        _this.state7b = response.data[6].stateB
+        _this.state8a = response.data[7].stateA
+        _this.state8b = response.data[7].stateB
+        _this.state9a = response.data[8].stateA
+        _this.state9b = response.data[8].stateB
+        _this.state10a = response.data[9].stateA
+        _this.state10b = response.data[9].stateB
+      })
+      this.open1()
     },
     initCharts() {
       this.chart1 = echarts.init(document.getElementById('chart1'), 'dark')
@@ -445,7 +497,7 @@ export default {
   },
   mounted() {
     this.initCharts()
-    this.timer=setInterval(this.getPlcData,10000)
+    this.timer=setInterval(this.getPlcData,20000)
   },
 }
 </script>

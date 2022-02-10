@@ -224,13 +224,70 @@ export default {
       plc9NumA:'0',
       plc9NumB:'0',
       plc10NumA:'0',
-      plc10NumB:'0'
+      plc10NumB:'0',
+      state1a:'',
+      state1b:'',
+      state2a:'',
+      state2b:'',
+      state3a:'',
+      state3b:'',
+      state4a:'',
+      state4b:'',
+      state5a:'',
+      state5b:'',
+      state6a:'',
+      state6b:''
     }
   },
   created(){
     this.getPlcData();
   },
   methods: {
+    open1() {
+      let msg=""
+      console.log(this.state1a)
+      if(this.state1a == '3'){
+        msg+="1-A "
+      }
+      if(this.state1b == '3'){
+        msg+="1-B "
+      }
+      if(this.state2a == '3'){
+        msg+="2-A "
+      }
+      if(this.state2b == '3'){
+        msg+="2-B "
+      }
+      if(this.state3a == '3'){
+        msg+="3-A "
+      }
+      if(this.state3b == '3'){
+        msg+="3-B "
+      }
+      if(this.state4a == '3'){
+        msg+="4-A "
+      }
+      if(this.state4b == '3'){
+        msg+="4-B "
+      }
+      if(this.state5a == '3'){
+        msg+="5-A "
+      }
+      if(this.state5b == '3'){
+        msg+="5-B "
+      }
+      if(this.state6a == '3'){
+        msg+="6-A "
+      }
+      if(this.state6b == '3'){
+        msg+="6-B"
+      }
+      this.$notify({
+        title: '提示',
+        message: msg == ""?'暂无报警信息':msg+'报警',
+        type: 'warning'
+      });
+    },
     getPlcData(){
       let _this= this
       this.$axios.get('http://localhost:8181/mesPlc/getNum').then(function (response) {
@@ -256,6 +313,22 @@ export default {
         _this.plc10NumA=response.data[9].prodNumA
         _this.plc10NumB=response.data[9].prodNumB
       })
+      this.$axios.get('http://localhost:8181/mesPlc/getStates').then(function (response) {
+        console.log(response.data)
+        _this.state1a=response.data[0].stateA
+        _this.state1b=response.data[0].stateB
+        _this.state2a=response.data[1].stateA
+        _this.state2b=response.data[1].stateB
+        _this.state3a=response.data[2].stateA
+        _this.state3b=response.data[2].stateB
+        _this.state4a=response.data[3].stateA
+        _this.state4b=response.data[3].stateB
+        _this.state5a=response.data[4].stateA
+        _this.state5b=response.data[4].stateB
+        _this.state6a=response.data[5].stateA
+        _this.state6b=response.data[5].stateB
+      })
+      this.open1()
     },
     initCharts() {
       this.chart1 = echarts.init(document.getElementById('chart1'), 'dark')
@@ -453,7 +526,7 @@ export default {
   },
   mounted() {
     this.initCharts()
-    this.timer=setInterval(this.getPlcData,10000)
+    this.timer=setInterval(this.getPlcData,20000)
   },
 }
 </script>

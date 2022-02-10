@@ -21,8 +21,8 @@
       </div>
       <div class="data">
         <span class="title">工作站1</span>
-        <span class="result">A工位:{{ state1a }}</span>
-        <span class="result">B工位:{{ state1b }}</span>
+        <span class="result">{{ state1a == '1' ? '运行中':state1a == '2'?'待机':state1a == '3'?'报警':'错误'}}</span>
+        <span class="result">{{ state1b == '1' ? '运行中':state1b == '2'?'待机':state1b == '3'?'报警':'错误'}}</span>
       </div>
     </div>
     <div class="box">
@@ -44,8 +44,8 @@
       </div>
       <div class="data">
         <span class="title">工作站2</span>
-        <span class="result">A工位:{{ state2a }}</span>
-        <span class="result">B工位:{{ state2b }}</span>
+        <span class="result">{{ state2a == '1' ? '运行中':state2a == '2'?'待机':state2a == '3'?'报警':'错误'}}</span>
+        <span class="result">{{ state2b == '1' ? '运行中':state2b == '2'?'待机':state2b == '3'?'报警':'错误'}}</span>
       </div>
     </div>
     <div class="box">
@@ -67,8 +67,8 @@
       </div>
       <div class="data">
         <span class="title">工作站3</span>
-        <span class="result">A工位:{{ state3a }}</span>
-        <span class="result">B工位:{{ state3b }}</span>
+        <span class="result">{{ state3a == '1' ? '运行中':state3a == '2'?'待机':state3a == '3'?'报警':'错误'}}</span>
+        <span class="result">{{ state3b == '1' ? '运行中':state3b == '2'?'待机':state3b == '3'?'报警':'错误'}}</span>
       </div>
     </div>
     <div class="box">
@@ -90,8 +90,8 @@
       </div>
       <div class="data">
         <span class="title">工作站4</span>
-        <span class="result">A工位:{{ state4a }}</span>
-        <span class="result">B工位:{{ state4b }}</span>
+        <span class="result">{{ state4a == '1' ? '运行中':state4a == '2'?'待机':state4a == '3'?'报警':'错误'}}</span>
+        <span class="result">{{ state4b == '1' ? '运行中':state4b == '2'?'待机':state4b == '3'?'报警':'错误'}}</span>
       </div>
     </div>
     <div class="box">
@@ -113,8 +113,8 @@
       </div>
       <div class="data">
         <span class="title">工作站5</span>
-        <span class="result">A工位:{{ state5a }}</span>
-        <span class="result">B工位:{{ state5b }}</span>
+        <span class="result">{{ state5a == '1' ? '运行中':state5a == '2'?'待机':state5a == '3'?'报警':'错误'}}</span>
+        <span class="result">{{ state5b == '1' ? '运行中':state5b == '2'?'待机':state5b == '3'?'报警':'错误'}}</span>
       </div>
     </div>
     <div class="box">
@@ -136,8 +136,8 @@
       </div>
       <div class="data">
         <span class="title">工作站6</span>
-        <span class="result">A工位:{{ state6a }}</span>
-        <span class="result">B工位:{{ state6b }}</span>
+        <span class="result">{{ state6a == '1' ? '运行中':state6a == '2'?'待机':state6a == '3'?'报警':'错误'}}</span>
+        <span class="result">{{ state6b == '1' ? '运行中':state6b == '2'?'待机':state6b == '3'?'报警':'错误'}}</span>
       </div>
     </div>
   </div>
@@ -154,18 +154,18 @@ export default {
   },
   data() {
     return {
-      state1a:'0',
-      state1b:'0',
-      state2a:'0',
-      state2b:'0',
-      state3a:'0',
-      state3b:'0',
-      state4a:'0',
-      state4b:'0',
-      state5a:'0',
-      state5b:'0',
-      state6a:'0',
-      state6b:'0'
+      state1a:'',
+      state1b:'',
+      state2a:'',
+      state2b:'',
+      state3a:'',
+      state3b:'',
+      state4a:'',
+      state4b:'',
+      state5a:'',
+      state5b:'',
+      state6a:'',
+      state6b:''
     }
   },
   methods:{
@@ -216,7 +216,7 @@ export default {
   font-family: '华文仿宋'
 }
 .box {
-  width: 16%;
+  width: 14%;
   margin-left: 0.5%;
   height: 300px;
   margin-top: 30px;
