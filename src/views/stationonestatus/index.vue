@@ -21,7 +21,7 @@
       </div>
       <div class="data">
         <span class="title">工作站1</span>
-        <span class="result">A工位:{{ state1a == '1' ? '运行中':state1a == '2'?'待机':state1a == '3'?'报警':'错误'}}
+        <span class="result">A工位:{{ state1a == '1' ? '运行中' : state1a == '2' ? '待机' : state1a == '3' ? '报警' : '错误' }}
          <template v-if="state1a == '1'">
            <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
         </template>
@@ -31,7 +31,7 @@
           <template v-else-if="state1a == '3'">
            <img :src="require('@/assets/station_pic/redlight.png')" alt="">
         </template></span>
-        <span class="result">B工位:{{ state1b == '1' ? '运行中':state1b == '2'?'待机':state1b == '3'?'报警':'错误'}}
+        <span class="result">B工位:{{ state1b == '1' ? '运行中' : state1b == '2' ? '待机' : state1b == '3' ? '报警' : '错误' }}
          <template v-if="state1b == '1'">
            <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
         </template>
@@ -62,7 +62,7 @@
       </div>
       <div class="data">
         <span class="title">工作站2</span>
-        <span class="result">A工位:{{ state2a == '1' ? '运行中':state2a == '2'?'待机':state2a == '3'?'报警':'错误'}}
+        <span class="result">A工位:{{ state2a == '1' ? '运行中' : state2a == '2' ? '待机' : state2a == '3' ? '报警' : '错误' }}
          <template v-if="state2a == '1'">
            <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
         </template>
@@ -72,7 +72,7 @@
           <template v-else-if="state2a == '3'">
            <img :src="require('@/assets/station_pic/redlight.png')" alt="">
         </template></span>
-        <span class="result">B工位:{{ state2b == '1' ? '运行中':state2b == '2'?'待机':state2b == '3'?'报警':'错误'}}
+        <span class="result">B工位:{{ state2b == '1' ? '运行中' : state2b == '2' ? '待机' : state2b == '3' ? '报警' : '错误' }}
          <template v-if="state2b == '1'">
            <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
         </template>
@@ -103,7 +103,7 @@
       </div>
       <div class="data">
         <span class="title">工作站3</span>
-        <span class="result">A工位:{{ state3a == '1' ? '运行中':state3a == '2'?'待机':state3a == '3'?'报警':'错误'}}
+        <span class="result">A工位:{{ state3a == '1' ? '运行中' : state3a == '2' ? '待机' : state3a == '3' ? '报警' : '错误' }}
          <template v-if="state3a == '1'">
            <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
         </template>
@@ -113,7 +113,7 @@
           <template v-else-if="state3a == '3'">
            <img :src="require('@/assets/station_pic/redlight.png')" alt="">
         </template></span>
-        <span class="result">B工位:{{ state3b == '1' ? '运行中':state3b == '2'?'待机':state3b == '3'?'报警':'错误'}}
+        <span class="result">B工位:{{ state3b == '1' ? '运行中' : state3b == '2' ? '待机' : state3b == '3' ? '报警' : '错误' }}
          <template v-if="state3b == '1'">
            <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
         </template>
@@ -144,7 +144,7 @@
       </div>
       <div class="data">
         <span class="title">工作站4</span>
-        <span class="result">A工位:{{ state4a == '1' ? '运行中':state4a == '2'?'待机':state4a == '3'?'报警':'错误'}}
+        <span class="result">A工位:{{ state4a == '1' ? '运行中' : state4a == '2' ? '待机' : state4a == '3' ? '报警' : '错误' }}
          <template v-if="state4a == '1'">
            <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
         </template>
@@ -154,7 +154,7 @@
           <template v-else-if="state4a == '3'">
            <img :src="require('@/assets/station_pic/redlight.png')" alt="">
         </template></span>
-        <span class="result">B工位:{{ state4b == '1' ? '运行中':state4b == '2'?'待机':state4b == '3'?'报警':'错误'}}
+        <span class="result">B工位:{{ state4b == '1' ? '运行中' : state4b == '2' ? '待机' : state4b == '3' ? '报警' : '错误' }}
           <template v-if="state4b == '1'">
            <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
         </template>
@@ -185,7 +185,7 @@
       </div>
       <div class="data">
         <span class="title">工作站5</span>
-        <span class="result">A工位:{{ state5a == '1' ? '运行中':state5a == '2'?'待机':state5a == '3'?'报警':'错误'}}
+        <span class="result">A工位:{{ state5a == '1' ? '运行中' : state5a == '2' ? '待机' : state5a == '3' ? '报警' : '错误' }}
          <template v-if="state5a == '1'">
            <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
         </template>
@@ -195,7 +195,7 @@
           <template v-else-if="state5a == '3'">
            <img :src="require('@/assets/station_pic/redlight.png')" alt="">
         </template></span>
-        <span class="result">B工位:{{ state5b == '1' ? '运行中':state5b == '2'?'待机':state5b == '3'?'报警':'错误'}}
+        <span class="result">B工位:{{ state5b == '1' ? '运行中' : state5b == '2' ? '待机' : state5b == '3' ? '报警' : '错误' }}
          <template v-if="state5b == '1'">
            <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
         </template>
@@ -226,7 +226,7 @@
       </div>
       <div class="data">
         <span class="title">工作站6</span>
-        <span class="result">A工位:{{ state6a == '1' ? '运行中':state6a == '2'?'待机':state6a == '3'?'报警':'错误'}}
+        <span class="result">A工位:{{ state6a == '1' ? '运行中' : state6a == '2' ? '待机' : state6a == '3' ? '报警' : '错误' }}
          <template v-if="state6a == '1'">
            <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
         </template>
@@ -236,7 +236,7 @@
           <template v-else-if="state6a == '3'">
            <img :src="require('@/assets/station_pic/redlight.png')" alt="">
         </template></span>
-        <span class="result">B工位:{{ state6b == '1' ? '运行中':state6b == '2'?'待机':state6b == '3'?'报警':'错误'}}
+        <span class="result">B工位:{{ state6b == '1' ? '运行中' : state6b == '2' ? '待机' : state6b == '3' ? '报警' : '错误' }}
          <template v-if="state6b == '1'">
            <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
         </template>
@@ -262,37 +262,37 @@ export default {
   },
   data() {
     return {
-      state1a:'',
-      state1b:'',
-      state2a:'',
-      state2b:'',
-      state3a:'',
-      state3b:'',
-      state4a:'',
-      state4b:'',
-      state5a:'',
-      state5b:'',
-      state6a:'',
-      state6b:''
+      state1a: '',
+      state1b: '',
+      state2a: '',
+      state2b: '',
+      state3a: '',
+      state3b: '',
+      state4a: '',
+      state4b: '',
+      state5a: '',
+      state5b: '',
+      state6a: '',
+      state6b: ''
     }
   },
-  methods:{
-    getPlcStatus(){
-      let _this= this
+  methods: {
+    getPlcStatus() {
+      let _this = this
       this.$axios.get('http://localhost:8181/mesPlc/getStates').then(function (response) {
         console.log(response.data)
-        _this.state1a=response.data[0].stateA
-        _this.state1b=response.data[0].stateB
-        _this.state2a=response.data[1].stateA
-        _this.state2b=response.data[1].stateB
-        _this.state3a=response.data[2].stateA
-        _this.state3b=response.data[2].stateB
-        _this.state4a=response.data[3].stateA
-        _this.state4b=response.data[3].stateB
-        _this.state5a=response.data[4].stateA
-        _this.state5b=response.data[4].stateB
-        _this.state6a=response.data[5].stateA
-        _this.state6b=response.data[5].stateB
+        _this.state1a = response.data[0].stateA
+        _this.state1b = response.data[0].stateB
+        _this.state2a = response.data[1].stateA
+        _this.state2b = response.data[1].stateB
+        _this.state3a = response.data[2].stateA
+        _this.state3b = response.data[2].stateB
+        _this.state4a = response.data[3].stateA
+        _this.state4b = response.data[3].stateB
+        _this.state5a = response.data[4].stateA
+        _this.state5b = response.data[4].stateB
+        _this.state6a = response.data[5].stateA
+        _this.state6b = response.data[5].stateB
       })
     }
   }
@@ -323,6 +323,7 @@ export default {
   font-size: 35px;
   font-family: '华文仿宋'
 }
+
 .box {
   width: 14%;
   margin-left: 0.5%;

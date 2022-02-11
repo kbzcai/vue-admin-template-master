@@ -149,7 +149,7 @@
               <span class="result">{{ monthPC }}</span>
             </div>
           </div>
-            <div id="chart3" :style="{height:'400px',marginTop: '20px'}"></div>
+          <div id="chart3" :style="{height:'400px',marginTop: '20px'}"></div>
         </el-card>
       </el-col>
       <el-col :span='6'>
@@ -159,20 +159,20 @@
           </div>
           <slot name="content"/>
           <div id="plc7" class="plcData">
-            <span class="plc">1-A：{{plc7NumA}}</span>
-            <span class="plc">1-B：{{plc7NumB}}</span>
+            <span class="plc">1-A：{{ plc7NumA }}</span>
+            <span class="plc">1-B：{{ plc7NumB }}</span>
           </div>
           <div id="plc8" class="plcData">
-            <span class="plc">2-A：{{plc8NumA}}</span>
-            <span class="plc">2-B：{{plc8NumB}}</span>
+            <span class="plc">2-A：{{ plc8NumA }}</span>
+            <span class="plc">2-B：{{ plc8NumB }}</span>
           </div>
           <div id="plc9" class="plcData">
-            <span class="plc">3-A：{{plc9NumA}}</span>
-            <span class="plc">3-B：{{plc9NumB}}</span>
+            <span class="plc">3-A：{{ plc9NumA }}</span>
+            <span class="plc">3-B：{{ plc9NumB }}</span>
           </div>
           <div id="plc10" class="plcData">
-            <span class="plc">4-A：{{plc10NumA}}</span>
-            <span class="plc">4-B：{{plc10NumB}}</span>
+            <span class="plc">4-A：{{ plc10NumA }}</span>
+            <span class="plc">4-B：{{ plc10NumB }}</span>
           </div>
         </el-card>
       </el-col>
@@ -197,26 +197,26 @@ export default {
       dayPC: '0%',
       weekPC: '0%',
       monthPC: '0%',
-      plc1NumA:'0',
-      plc1NumB:'0',
-      plc2NumA:'0',
-      plc2NumB:'0',
-      plc3NumA:'0',
-      plc3NumB:'0',
-      plc4NumA:'0',
-      plc4NumB:'0',
-      plc5NumA:'0',
-      plc5NumB:'0',
-      plc6NumA:'0',
-      plc6NumB:'0',
-      plc7NumA:'0',
-      plc7NumB:'0',
-      plc8NumA:'0',
-      plc8NumB:'0',
-      plc9NumA:'0',
-      plc9NumB:'0',
-      plc10NumA:'0',
-      plc10NumB:'0',
+      plc1NumA: '0',
+      plc1NumB: '0',
+      plc2NumA: '0',
+      plc2NumB: '0',
+      plc3NumA: '0',
+      plc3NumB: '0',
+      plc4NumA: '0',
+      plc4NumB: '0',
+      plc5NumA: '0',
+      plc5NumB: '0',
+      plc6NumA: '0',
+      plc6NumB: '0',
+      plc7NumA: '0',
+      plc7NumB: '0',
+      plc8NumA: '0',
+      plc8NumB: '0',
+      plc9NumA: '0',
+      plc9NumB: '0',
+      plc10NumA: '0',
+      plc10NumB: '0',
       state7a: '',
       state7b: '',
       state8a: '',
@@ -227,68 +227,68 @@ export default {
       state10b: '',
     }
   },
-  created(){
+  created() {
     this.getPlcData();
   },
   methods: {
     open1() {
-      let msg=""
-      if(this.state7a == '3'){
-        msg+="1-A "
+      let msg = ""
+      if (this.state7a == '3') {
+        msg += "1-A "
       }
-      if(this.state7b == '3'){
-        msg+="1-B "
+      if (this.state7b == '3') {
+        msg += "1-B "
       }
-      if(this.state8a == '3'){
-        msg+="2-A "
+      if (this.state8a == '3') {
+        msg += "2-A "
       }
-      if(this.state8b == '3'){
-        msg+="2-B "
+      if (this.state8b == '3') {
+        msg += "2-B "
       }
-      if(this.state9a == '3'){
-        msg+="3-A "
+      if (this.state9a == '3') {
+        msg += "3-A "
       }
-      if(this.state9b == '3'){
-        msg+="3-B "
+      if (this.state9b == '3') {
+        msg += "3-B "
       }
-      if(this.state10a == '3'){
-        msg+="4-A "
+      if (this.state10a == '3') {
+        msg += "4-A "
       }
-      if(this.state10b == '3'){
-        msg+="4-B "
+      if (this.state10b == '3') {
+        msg += "4-B "
       }
-      if(msg != ""){
+      if (msg != "") {
         this.$notify({
           title: '提示',
-          message: msg+'报警',
+          message: msg + '报警',
           type: 'warning'
         });
       }
     },
-    getPlcData(){
-      let _this= this
+    getPlcData() {
+      let _this = this
       this.$axios.get('http://localhost:8181/mesPlc/getNum').then(function (response) {
         console.log(response.data)
-        _this.plc1NumA=response.data[0].prodNumA
-        _this.plc1NumB=response.data[0].prodNumB
-        _this.plc2NumA=response.data[1].prodNumA
-        _this.plc2NumB=response.data[1].prodNumB
-        _this.plc3NumA=response.data[2].prodNumA
-        _this.plc3NumB=response.data[2].prodNumB
-        _this.plc4NumA=response.data[3].prodNumA
-        _this.plc4NumB=response.data[3].prodNumB
-        _this.plc5NumA=response.data[4].prodNumA
-        _this.plc5NumB=response.data[4].prodNumB
-        _this.plc6NumA=response.data[5].prodNumA
-        _this.plc6NumB=response.data[5].prodNumB
-        _this.plc7NumA=response.data[6].prodNumA
-        _this.plc7NumB=response.data[6].prodNumB
-        _this.plc8NumA=response.data[7].prodNumA
-        _this.plc8NumB=response.data[7].prodNumB
-        _this.plc9NumA=response.data[8].prodNumA
-        _this.plc9NumB=response.data[8].prodNumB
-        _this.plc10NumA=response.data[9].prodNumA
-        _this.plc10NumB=response.data[9].prodNumB
+        _this.plc1NumA = response.data[0].prodNumA
+        _this.plc1NumB = response.data[0].prodNumB
+        _this.plc2NumA = response.data[1].prodNumA
+        _this.plc2NumB = response.data[1].prodNumB
+        _this.plc3NumA = response.data[2].prodNumA
+        _this.plc3NumB = response.data[2].prodNumB
+        _this.plc4NumA = response.data[3].prodNumA
+        _this.plc4NumB = response.data[3].prodNumB
+        _this.plc5NumA = response.data[4].prodNumA
+        _this.plc5NumB = response.data[4].prodNumB
+        _this.plc6NumA = response.data[5].prodNumA
+        _this.plc6NumB = response.data[5].prodNumB
+        _this.plc7NumA = response.data[6].prodNumA
+        _this.plc7NumB = response.data[6].prodNumB
+        _this.plc8NumA = response.data[7].prodNumA
+        _this.plc8NumB = response.data[7].prodNumB
+        _this.plc9NumA = response.data[8].prodNumA
+        _this.plc9NumB = response.data[8].prodNumB
+        _this.plc10NumA = response.data[9].prodNumA
+        _this.plc10NumB = response.data[9].prodNumB
       })
       this.$axios.get('http://localhost:8181/mesPlc/getStates').then(function (response) {
         console.log(response.data)
@@ -499,13 +499,13 @@ export default {
   },
   mounted() {
     this.initCharts()
-    this.timer=setInterval(this.getPlcData,20000)
+    this.timer = setInterval(this.getPlcData, 20000)
   },
 }
 </script>
 
 <style lang="scss">
-.plcData{
+.plcData {
   height: 80px;
   width: 100%;
   border: 2px solid #065278;
@@ -514,13 +514,15 @@ export default {
   background-color: rgba(255, 255, 255, 0);
   margin-top: 10px;
 }
-.plc{
+
+.plc {
   display: inline-block;
   font-size: 35px;
   width: 50%;
   height: 100%;
   line-height: 80px;
 }
+
 .data {
   position: relative;
   text-align: center;
