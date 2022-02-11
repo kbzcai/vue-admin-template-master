@@ -21,8 +21,29 @@
       </div>
       <div class="data">
         <span class="title">工作站7</span>
-        <span class="result">{{ state7a == '1' ? '运行中':state7a == '2'?'待机':state7a == '3'?'报警':'错误'}}</span>
-        <span class="result">{{ state7b == '1' ? '运行中':state7b == '2'?'待机':state7b == '3'?'报警':'错误'}}</span>
+        <span class="result">A工位:{{ state7a == '1' ? '运行中' : state7a == '2' ? '待机' : state7a == '3' ? '报警' : '错误' }}
+        <template v-if="state7a == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state7a == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state7a == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template>
+        </span>
+        <span
+          class="result">B工位:{{ state7b == '1' ? '运行中' : state7b == '2' ? '待机' : state7b == '3' ? '报警' : '错误' }}
+         <template v-if="state7b == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state7b == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state7b == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template>
+        </span>
       </div>
     </div>
     <div class="box">
@@ -44,8 +65,28 @@
       </div>
       <div class="data">
         <span class="title">工作站8</span>
-        <span class="result">{{ state8a == '1' ? '运行中':state8a == '2'?'待机':state8a == '3'?'报警':'错误'}}</span>
-        <span class="result">{{ state8b == '1' ? '运行中':state8b == '2'?'待机':state8b == '3'?'报警':'错误'}}</span>
+        <span
+          class="result">A工位:{{ state8a == '1' ? '运行中' : state8a == '2' ? '待机' : state8a == '3' ? '报警' : '错误' }}
+         <template v-if="state8a == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state8a == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state8a == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
+        <span
+          class="result">B工位:{{ state8b == '1' ? '运行中' : state8b == '2' ? '待机' : state8b == '3' ? '报警' : '错误' }}
+         <template v-if="state8b == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state8b == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state8b == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
       </div>
     </div>
     <div class="box">
@@ -67,8 +108,28 @@
       </div>
       <div class="data">
         <span class="title">工作站9</span>
-          <span class="result">{{ state9a == '1' ? '运行中':state9a == '2'?'待机':state9a == '3'?'报警':'错误'}}</span>
-          <span class="result">{{ state9b == '1' ? '运行中':state9b == '2'?'待机':state9b == '3'?'报警':'错误'}}</span>
+        <span
+          class="result">A工位:{{ state9a == '1' ? '运行中' : state9a == '2' ? '待机' : state9a == '3' ? '报警' : '错误' }}
+         <template v-if="state9a == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state9a == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state9a == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
+        <span
+          class="result">B工位:{{ state9b == '1' ? '运行中' : state9b == '2' ? '待机' : state9b == '3' ? '报警' : '错误' }}
+         <template v-if="state9b == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state9b == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state9b == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
       </div>
     </div>
     <div class="box">
@@ -90,8 +151,28 @@
       </div>
       <div class="data">
         <span class="title">工作站10</span>
-        <span class="result">{{ state10a == '1' ? '运行中':state10a == '2'?'待机':state10a == '3'?'报警':'错误'}}</span>
-        <span class="result">{{ state10b == '1' ? '运行中':state10b == '2'?'待机':state10b == '3'?'报警':'错误'}}</span>
+        <span
+          class="result">A工位:{{ state10a == '1' ? '运行中' : state10a == '2' ? '待机' : state10a == '3' ? '报警' : '错误' }}
+         <template v-if="state10a == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state10a == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state10a == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
+        <span
+          class="result">B工位:{{ state10b == '1' ? '运行中' : state10b == '2' ? '待机' : state10b == '3' ? '报警' : '错误' }}
+         <template v-if="state7a == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state7a == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state7a == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
       </div>
     </div>
   </div>
@@ -159,7 +240,7 @@ export default {
 .data .result {
   display: block;
   margin-top: 40px;
-  font-size: 55px;
+  font-size: 35px;
   font-family: '华文仿宋'
 }
 

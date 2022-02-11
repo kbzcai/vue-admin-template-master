@@ -257,11 +257,13 @@ export default {
       if(this.state10b == '3'){
         msg+="4-B "
       }
-      this.$notify({
-        title: '提示',
-        message: msg == ""?'暂无报警信息':msg+'报警',
-        type: 'warning'
-      });
+      if(msg != ""){
+        this.$notify({
+          title: '提示',
+          message: msg+'报警',
+          type: 'warning'
+        });
+      }
     },
     getPlcData(){
       let _this= this
