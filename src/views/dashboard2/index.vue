@@ -158,22 +158,103 @@
             <span>设备产量</span>
           </div>
           <slot name="content"/>
+          <div id="plc1" class="plcData">
+            <span class="plc">工作站1——A工位：{{ plc7NumA }}
+            <template v-if="state7a == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state7a == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state7a == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
+          </div>
+          <div id="plc2" class="plcData">
+            <span class="plc">工作站1——B工位：{{ plc7NumB }}
+             <template v-if="state7b == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state7b == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state7b == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
+          </div>
+          <div id="plc3" class="plcData">
+            <span class="plc">工作站2——A工位：{{ plc8NumA }}
+             <template v-if="state8a == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state8a == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state8a == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
+          </div>
+          <div id="plc4" class="plcData">
+            <span class="plc">工作站2——B工位：{{ plc8NumB }}
+             <template v-if="state8b == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state8b == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state8b == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
+          </div>
+          <div id="plc5" class="plcData">
+            <span class="plc">工作站3——A工位：{{ plc9NumA }}
+             <template v-if="state9a == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state9a == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state9a == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
+          </div>
+          <div id="plc6" class="plcData">
+            <span class="plc">工作站3——B工位：{{ plc9NumB }}
+             <template v-if="state9b == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state9b == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state9b == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
+          </div>
           <div id="plc7" class="plcData">
-            <span class="plc">1-A：{{ plc7NumA }}</span>
-            <span class="plc">1-B：{{ plc7NumB }}</span>
+            <span class="plc">工作站4——A工位：：{{ plc10NumA }}
+             <template v-if="state10a == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state10a == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state10a == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
           </div>
           <div id="plc8" class="plcData">
-            <span class="plc">2-A：{{ plc8NumA }}</span>
-            <span class="plc">2-B：{{ plc8NumB }}</span>
+            <span class="plc">工作站4——B工位：{{ plc10NumB }}
+             <template v-if="state10b == '1'">
+           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+        </template>
+          <template v-else-if="state10b == '2'">
+           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+        </template>
+          <template v-else-if="state10b == '3'">
+           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+        </template></span>
           </div>
-          <div id="plc9" class="plcData">
-            <span class="plc">3-A：{{ plc9NumA }}</span>
-            <span class="plc">3-B：{{ plc9NumB }}</span>
-          </div>
-          <div id="plc10" class="plcData">
-            <span class="plc">4-A：{{ plc10NumA }}</span>
-            <span class="plc">4-B：{{ plc10NumB }}</span>
-          </div>
+
         </el-card>
       </el-col>
     </el-row>
@@ -506,7 +587,7 @@ export default {
 
 <style lang="scss">
 .plcData {
-  height: 80px;
+  height: 65px;
   width: 100%;
   border: 2px solid #065278;
   -moz-box-shadow: 0 -2px 7px 1px #065278 inset; /* 老的 Firefox */
@@ -517,10 +598,10 @@ export default {
 
 .plc {
   display: inline-block;
-  font-size: 35px;
-  width: 50%;
+  font-size: 25px;
   height: 100%;
-  line-height: 80px;
+  line-height: 65px;
+  text-align: center;
 }
 
 .data {
