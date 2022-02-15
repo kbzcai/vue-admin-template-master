@@ -305,6 +305,12 @@
         </el-card>
       </el-col>
     </el-row>
+    <div style="position: fixed;bottom: 60px;right: 50px; z-index: 100;cursor: pointer;">
+      <span style="height:100px; line-height:100px; display:block; color:#FFF; text-align:center;">
+        <el-image :src="require('@/assets/station_pic/qiehuan.png')" alt="" @click="goto">
+        </el-image>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -363,6 +369,9 @@ export default {
     this.getPlcData();
   },
   methods: {
+    goto() {
+      this.$router.push({path: '/dashboard2'})
+    },
     open1() {
       let msg = ""
       console.log(this.state1a)

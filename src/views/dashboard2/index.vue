@@ -254,10 +254,15 @@
            <img :src="require('@/assets/station_pic/redlight.png')" alt="">
         </template></span>
           </div>
-
         </el-card>
       </el-col>
     </el-row>
+    <div style="position: fixed;bottom: 60px;right: 50px; z-index: 100;cursor: pointer;">
+      <span style="height:100px; line-height:100px; display:block; color:#FFF; text-align:center;">
+        <el-image :src="require('@/assets/station_pic/qiehuan.png')" alt="" @click="goto" >
+        </el-image>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -312,6 +317,9 @@ export default {
     this.getPlcData();
   },
   methods: {
+    goto() {
+      this.$router.push({path: '/dashboard1'})
+    },
     open1() {
       let msg = ""
       if (this.state7a == '3') {
