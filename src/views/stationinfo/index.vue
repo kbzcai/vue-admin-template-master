@@ -2,7 +2,14 @@
   <div>
     <el-form :inline="true" :model="stationCondition" class="demo-form-inline" style="margin-top:20px;margin-left: 25px;">
       <el-form-item label="工位名称">
-        <el-input v-model="stationCondition.stationName" placeholder="请输入名称查询"></el-input>
+        <el-autocomplete
+          class="inline-input"
+          v-model="stationCondition.stationName"
+          :fetch-suggestions="querySearch1"
+          placeholder="请输入工位名称查询"
+          :trigger-on-focus="false"
+          @select="handleSelect"
+        ></el-autocomplete>
       </el-form-item>
       <el-form-item label="状态">
         <el-select v-model="stationCondition.status" placeholder="状态">
@@ -143,6 +150,9 @@ export default {
   created() {
     this.fetchPageData(1, 10);
   },
+  mounted() {
+    this.queryAllStationName()
+  },
   data() {
     return {
       delVisible: false,//删除提示弹框的状态
@@ -155,6 +165,7 @@ export default {
       limit: 10, // 每页记录数
       pages: '0', //总页码数
 
+      stationNameList:'',
       stationCondition:{
         stationName: '',
         status: ''
@@ -181,6 +192,29 @@ export default {
   methods: {
     onSubmit(){
       this.fetchPageData(1,10);
+    },
+    handleSelect(item) {
+      console.log(item);
+    },
+    querySearch1(queryString, cb) {
+      let stationNameList = this.stationNameList;
+      let results = queryString ? stationNameList.filter(this.createFilter1(queryString)) : stationNameList;
+      // 调用 callback 返回建议列表的数据
+      cb(results);
+    },
+    createFilter1(queryString) {
+      return (stationNameList) => {
+        return (stationNameList.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+      };
+    },
+    queryAllStationName() {
+      let list = []
+      const _this = this
+      this.$axios.get('http://localhost:8181/mesStation/queryAllStationName').then(function (resp) {
+        list = resp.data.map(item => ({value: item}))
+        console.log(list)
+        _this.stationNameList = list
+      })
     },
     stateFormat(row, column) {
       if (row.status == '1') {

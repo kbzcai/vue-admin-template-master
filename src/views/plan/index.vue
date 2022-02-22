@@ -6,7 +6,14 @@
     <el-form :inline="true" :model="planCondition" class="demo-form-inline"
              style="margin-top:20px;margin-left: 25px;">
       <el-form-item label="计划号">
-        <el-input v-model="planCondition.planNo" placeholder="请输入计划号查询"></el-input>
+        <el-autocomplete
+          class="inline-input"
+          v-model="planCondition.planNo"
+          :fetch-suggestions="querySearch1"
+          placeholder="请输入计划编号查询"
+          :trigger-on-focus="false"
+          @select="handleSelect"
+        ></el-autocomplete>
       </el-form-item>
       <el-form-item label="计划状态">
         <el-select v-model="planCondition.planStatus" placeholder="选择状态">
@@ -242,6 +249,7 @@ export default {
     clearInterval(this.timer)
   },
   mounted() {
+    this.queryAllPlanNo()
     this.timer = setInterval(this.getProductPlan, 10000)
   },
   data() {
@@ -257,6 +265,7 @@ export default {
       current: 1, // 页码
       limit: 10, // 每页记录数
       pages: '0', //总页码数
+      planNoList:'',
       productForm: [{
         productNo: ''
       }],
@@ -332,15 +341,27 @@ export default {
     onSubmit() {
       this.fetchPageData(1, 10)
     },
-    getProductPlan() {
-      let _this = this
-      this.$axios.get('http://localhost:8181/mesPrimaryProducePlan/getProductPlan').then(function (resp) {
-        console.log(resp.data)
-        if (resp.data.mes == '查询成功') {
-          _this.nowPlanNo = resp.data.mesPrimaryProducePlan.planNo;
-          _this.nowPlanActualNum = resp.data.mesPrimaryProducePlan.actualNum;
-          _this.nowPlanFailNum = resp.data.mesPrimaryProducePlan.failNum;
-        }
+    handleSelect(item) {
+      console.log(item);
+    },
+    querySearch1(queryString, cb) {
+      let planNoList = this.planNoList;
+      let results = queryString ? planNoList.filter(this.createFilter1(queryString)) : planNoList;
+      // 调用 callback 返回建议列表的数据
+      cb(results);
+    },
+    createFilter1(queryString) {
+      return (planNoList) => {
+        return (planNoList.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+      };
+    },
+    queryAllPlanNo() {
+      let list = []
+      const _this = this
+      this.$axios.get('http://localhost:8181/mesPrimaryProducePlan/queryAllPlanNo').then(function (resp) {
+        list = resp.data.map(item => ({value: item}))
+        console.log(list)
+        _this.planNoList = list
       })
     },
     startPlan: function (index, row) {

@@ -3,7 +3,14 @@
     <el-form :inline="true" :model="productCondition" class="demo-form-inline"
              style="margin-top:20px;margin-left: 25px;">
       <el-form-item label="产品编号">
-        <el-input v-model="productCondition.productNo" placeholder="请输入编号查询"></el-input>
+        <el-autocomplete
+          class="inline-input"
+          v-model="productCondition.productNo"
+          :fetch-suggestions="querySearch1"
+          placeholder="请输入产品编号查询"
+          :trigger-on-focus="false"
+          @select="handleSelect"
+        ></el-autocomplete>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -103,6 +110,9 @@ export default {
   created() {
     this.fetchPageData(1, 10);
   },
+  mounted() {
+    this.queryAllProductNo()
+  },
   data() {
     return {
       delVisible: false,//删除提示弹框的状态
@@ -115,6 +125,7 @@ export default {
       limit: 10, // 每页记录数
       pages: '0', //总页码数
 
+      productNoList:'',
       productCondition: {
         productNo: ''
       },
@@ -133,6 +144,29 @@ export default {
     }
   },
   methods: {
+    handleSelect(item) {
+      console.log(item);
+    },
+    querySearch1(queryString, cb) {
+      let productNoList = this.productNoList;
+      let results = queryString ? productNoList.filter(this.createFilter1(queryString)) : productNoList;
+      // 调用 callback 返回建议列表的数据
+      cb(results);
+    },
+    createFilter1(queryString) {
+      return (productNoList) => {
+        return (productNoList.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+      };
+    },
+    queryAllProductNo() {
+      let list = []
+      const _this = this
+      this.$axios.get('http://localhost:8181/mesProduct/queryAllProductNo').then(function (resp) {
+        list = resp.data.map(item => ({value: item}))
+        console.log(list)
+        _this.productNoList = list
+      })
+    },
     refresh(response, file, fileList) {
       this.$router.go(0);
     },
@@ -148,17 +182,17 @@ export default {
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
-    importBom() {
-      const _this = this
-      this.$axios.post('http://localhost:8181/mesBom/importBom').then(function (resp) {
-        console.log(resp.data)
-        if (resp.data == "删除成功") {
-          _this.$router.go(0);
-        } else {
-          alert("删除失败")
-        }
-      })
-    },
+    // importBom() {
+    //   const _this = this
+    //   this.$axios.post('http://localhost:8181/mesBom/importBom').then(function (resp) {
+    //     console.log(resp.data)
+    //     if (resp.data == "删除成功") {
+    //       _this.$router.go(0);
+    //     } else {
+    //       alert("删除失败")
+    //     }
+    //   })
+    // },
     onSubmit() {
       this.fetchPageData(1, 10);
     },

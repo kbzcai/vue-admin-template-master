@@ -3,7 +3,14 @@
     <el-form :inline="true" :model="faultHistoryCondition" class="demo-form-inline"
              style="margin-top:20px;margin-left: 25px;">
       <el-form-item label="设备号">
-        <el-input v-model="faultHistoryCondition.equipmentNo" placeholder="请输入设备号查询"></el-input>
+        <el-autocomplete
+          class="inline-input"
+          v-model="faultHistoryCondition.equipmentNo"
+          :fetch-suggestions="querySearch1"
+          placeholder="请输入设备号查询"
+          :trigger-on-focus="false"
+          @select="handleSelect"
+        ></el-autocomplete>
       </el-form-item>
       <el-form-item>
         <el-date-picker type="datetime" placeholder="选择开始日期" v-model="faultHistoryCondition.beginTime" :picker-options="pickerOptions"></el-date-picker>
@@ -100,6 +107,9 @@ export default {
   created() {
     this.fetchPageData(1, 10);
   },
+  mounted() {
+    this.queryAllEquipmentNo()
+  },
   data() {
     return {
       pickerOptions: {
@@ -129,6 +139,7 @@ export default {
       delarr: [],//存放删除的数据
       multipleSelection: [],//多选的数据
 
+      equipmentNoList:'',
       faultHistoryCondition: {
         equipmentNo: '',
         beginTime: '',
@@ -151,6 +162,20 @@ export default {
     onSubmit() {
       this.fetchPageData(1, 10)
     },
+    handleSelect(item) {
+      console.log(item);
+    },
+    querySearch1(queryString, cb) {
+      let equipmentNoList = this.equipmentNoList;
+      let results = queryString ? equipmentNoList.filter(this.createFilter1(queryString)) : equipmentNoList;
+      // 调用 callback 返回建议列表的数据
+      cb(results);
+    },
+    createFilter1(queryString) {
+      return (equipmentNoList) => {
+        return (equipmentNoList.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+      };
+    },
     deleteRow() {
       const _this = this
       this.$axios.delete('http://localhost:8181/mesEquipmentFaultHistory/deleteBySelectIds/' + this.delarr).then(function (resp) {
@@ -163,6 +188,15 @@ export default {
       })
       this.delarr = [];
       this.delVisible = false;
+    },
+    queryAllEquipmentNo() {
+      let list = []
+      const _this = this
+      this.$axios.get('http://localhost:8181/mesEquipmentFaultHistory/queryAllEquipmentNo').then(function (resp) {
+        list = resp.data.map(item => ({value: item}))
+        console.log(list)
+        _this.equipmentNoList = list
+      })
     },
     handleDelete(index, row) {
       this.idx = index;

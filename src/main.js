@@ -16,6 +16,8 @@ import '@/icons' // icon
 import '@/permission' // permission control
 import axios from 'axios'
 import VueResource from 'vue-resource'
+import Blob from '@/tools/Blob'
+import Export2Excel from '@/tools/Export2Excel'
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api

@@ -2,16 +2,33 @@
   <div>
     <el-form :inline="true" :model="bomCondition" class="demo-form-inline" style="margin-top:20px;margin-left: 25px;">
       <el-form-item label="产品编号">
-        <el-input v-model="bomCondition.productNo" placeholder="请输入编号查询"></el-input>
+        <el-autocomplete
+          class="inline-input"
+          v-model="bomCondition.productNo"
+          :fetch-suggestions="querySearch1"
+          placeholder="请输入编号查询"
+          :trigger-on-focus="false"
+          @select="handleSelect"
+        ></el-autocomplete>
       </el-form-item>
       <el-form-item label="物料编号">
-        <el-input v-model="bomCondition.materialNo" placeholder="请输入编号查询"></el-input>
+        <el-autocomplete
+          class="inline-input"
+          v-model="bomCondition.materialNo"
+          :fetch-suggestions="querySearch2"
+          placeholder="请输入编号查询"
+          :trigger-on-focus="false"
+          @select="handleSelect"
+        ></el-autocomplete>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">查询</el-button>
       </el-form-item>
       <el-form-item>
         <el-button type="danger" @click="deleteAll">批量删除</el-button>
+      </el-form-item>
+      <el-form-item style="float: right">
+        <el-button type="primary" @click="export2Excel">导出Excel表</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -59,11 +76,11 @@
             size="mini"
             @click="handleEdit(scope.$index, scope.row)">编辑
           </el-button>
-<!--          <el-button-->
-<!--            size="mini"-->
-<!--            type="danger"-->
-<!--            @click="handleDelete(scope.$index, scope.row)">删除-->
-<!--          </el-button>-->
+          <!--          <el-button-->
+          <!--            size="mini"-->
+          <!--            type="danger"-->
+          <!--            @click="handleDelete(scope.$index, scope.row)">删除-->
+          <!--          </el-button>-->
         </template>
       </el-table-column>
     </el-table>
@@ -151,6 +168,11 @@ export default {
   created() {
     this.fetchPageData(1, 10);
   },
+  mounted() {
+    this.queryAllProductNo()
+    this.queryAllMaterialNo()
+    console.log(this.productNoList)
+  },
   data() {
     return {
       delVisible: false,//删除提示弹框的状态
@@ -163,6 +185,8 @@ export default {
       limit: 10, // 每页记录数
       pages: '0', //总页码数
 
+      productNoList: '',
+      materialNoList: '',
       bomCondition: {
         productNo: '',
         materialNo: ''
@@ -172,7 +196,10 @@ export default {
         productNo: '',
         materialNo: '',
         materialDesc: '',
-        stationNo: ''
+        stationNo: '',
+        productNum: '',
+        manufacturer: '',
+        productWeight: ''
       }],
       editForm: {
         id: '',
@@ -201,8 +228,83 @@ export default {
     }
   },
   methods: {
+    export2Excel() {
+      require.ensure([], () => {
+        const {export_json_to_excel} = require("@/tools/Export2Excel");  //此处需要修改为自己的正确路径
+        // 设置自己的excel表头
+        const tHeader = [
+          "唯一标识",
+          "物料编号",
+          "产品编号",
+          "物料描述",
+          "工位",
+          "数量",
+          "供应商",
+          "重量"
+        ]; // 上面设置Excel的表格第一行的标题
+        const filterVal = [
+          "id",
+          "productNo",
+          "materialNo",
+          "materialDesc",
+          "stationNo",
+          "productNum",
+          "manufacturer",
+          "productWeight"
+        ]; // client_id client_name client_phone 为tableData的属性
+        const list = this.tableData; //把data里的tableData存到list
+        const data = this.formatJson(filterVal, list);
+        export_json_to_excel(tHeader, data, "物料excel表");
+      });
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => v[j]));
+    },
     onSubmit() {
       this.fetchPageData(1, 10);
+    },
+    handleSelect(item) {
+      console.log(item);
+    },
+    querySearch1(queryString, cb) {
+      let productNoList = this.productNoList;
+      let results = queryString ? productNoList.filter(this.createFilter1(queryString)) : productNoList;
+      // 调用 callback 返回建议列表的数据
+      cb(results);
+    },
+    createFilter1(queryString) {
+      return (productNoList) => {
+        return (productNoList.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+      };
+    },
+    querySearch2(queryString, cb) {
+      let materialNoList = this.materialNoList;
+      let results = queryString ? materialNoList.filter(this.createFilter2(queryString)) : materialNoList;
+      // 调用 callback 返回建议列表的数据
+      cb(results);
+    },
+    createFilter2(queryString) {
+      return (materialNoList) => {
+        return (materialNoList.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+      };
+    },
+    queryAllProductNo() {
+      let list = []
+      const _this = this
+      this.$axios.get('http://localhost:8181/mesBom/queryAllProductNo').then(function (resp) {
+        list = resp.data.map(item => ({value: item}))
+        console.log(list)
+        _this.productNoList = list
+      })
+    },
+    queryAllMaterialNo() {
+      let list = []
+      const _this = this
+      this.$axios.get('http://localhost:8181/mesBom/queryAllMaterialNo').then(function (resp) {
+        list = resp.data.map(item => ({value: item}))
+        console.log(list)
+        _this.materialNoList = list
+      })
     },
     deleteRow() {
       const _this = this
