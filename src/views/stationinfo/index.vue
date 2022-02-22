@@ -9,6 +9,7 @@
           placeholder="请输入工位名称查询"
           :trigger-on-focus="false"
           @select="handleSelect"
+          clearable
         ></el-autocomplete>
       </el-form-item>
       <el-form-item label="状态">

@@ -1,16 +1,6 @@
 <template>
   <div>
     <el-form :inline="true" :model="bomCondition" class="demo-form-inline" style="margin-top:20px;margin-left: 25px;">
-      <el-form-item label="产品编号">
-        <el-autocomplete
-          class="inline-input"
-          v-model="bomCondition.productNo"
-          :fetch-suggestions="querySearch1"
-          placeholder="请输入编号查询"
-          :trigger-on-focus="false"
-          @select="handleSelect"
-        ></el-autocomplete>
-      </el-form-item>
       <el-form-item label="物料编号">
         <el-autocomplete
           class="inline-input"
@@ -19,6 +9,18 @@
           placeholder="请输入编号查询"
           :trigger-on-focus="false"
           @select="handleSelect"
+          clearable
+        ></el-autocomplete>
+      </el-form-item>
+      <el-form-item label="产品编号">
+        <el-autocomplete
+          class="inline-input"
+          v-model="bomCondition.productNo"
+          :fetch-suggestions="querySearch1"
+          placeholder="请输入编号查询"
+          :trigger-on-focus="false"
+          @select="handleSelect"
+          clearable
         ></el-autocomplete>
       </el-form-item>
       <el-form-item>

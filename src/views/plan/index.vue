@@ -13,6 +13,7 @@
           placeholder="请输入计划编号查询"
           :trigger-on-focus="false"
           @select="handleSelect"
+          clearable
         ></el-autocomplete>
       </el-form-item>
       <el-form-item label="计划状态">

@@ -10,6 +10,7 @@
           placeholder="请输入设备号查询"
           :trigger-on-focus="false"
           @select="handleSelect"
+          clearable
         ></el-autocomplete>
       </el-form-item>
       <el-form-item>
