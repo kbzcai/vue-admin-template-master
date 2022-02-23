@@ -14,10 +14,12 @@
         ></el-autocomplete>
       </el-form-item>
       <el-form-item>
-        <el-date-picker type="datetime" placeholder="选择开始日期" v-model="equipmentCondition.beginTime" :picker-options="pickerOptions"></el-date-picker>
+        <el-date-picker type="datetime" placeholder="选择开始日期" v-model="equipmentCondition.beginTime"
+                        :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-date-picker type="datetime" placeholder="选择结束日期" v-model="equipmentCondition.endTime" :picker-options="pickerOptions"></el-date-picker>
+        <el-date-picker type="datetime" placeholder="选择结束日期" v-model="equipmentCondition.endTime"
+                        :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -113,7 +115,7 @@
         </el-form-item>
         <el-form-item label="安装日期" prop="installDate">
           <el-date-picker v-model="insertForm.installDate" placeholder="选择安装日期" format="yyyy年MM月dd日"
-                type="datetime"   :picker-options="pickerOptions"       value-format="yyyy-MM-dd HH:mm:ss">
+                          type="datetime" :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss">
           </el-date-picker>
         </el-form-item>
       </el-form>
@@ -179,7 +181,7 @@
         </el-form-item>
         <el-form-item label="故障时间" prop="failStartTime">
           <el-date-picker v-model="reportFailForm.faultStartTime" placeholder="选择故障时间" format="yyyy年MM月dd日"
-          type="datetime"   :picker-options="pickerOptions"value-format="yyyy-MM-dd HH:mm:ss">
+                          type="datetime" :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss">
           </el-date-picker>
         </el-form-item>
       </el-form>
@@ -202,7 +204,7 @@
         </el-form-item>
         <el-form-item label="完成时间" prop="repairTime">
           <el-date-picker v-model="finishFailForm.repairTime" placeholder="选择维修完成时间" format="yyyy年MM月dd日"
-           type="datetime"   :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss">
+                          type="datetime" :picker-options="pickerOptions" value-format="yyyy-MM-dd HH:mm:ss">
           </el-date-picker>
         </el-form-item>
       </el-form>
@@ -276,11 +278,11 @@ export default {
       limit: 10, // 每页记录数
       pages: '0', //总页码数
 
-      equipmentNoList:'',
-      equipmentCondition:{
+      equipmentNoList: '',
+      equipmentCondition: {
         equipmentNo: '',
         beginTime: '',
-        endTime:''
+        endTime: ''
       },
       tableData: [{
         id: '',
@@ -479,7 +481,7 @@ export default {
     },
     fetchPageData: function (current, limit) {
       const _this = this
-      this.$axios.post('http://localhost:8181/mesEquipment/queryByList/' + current + "/" + limit,this.equipmentCondition).then(function (resp) {
+      this.$axios.post('http://localhost:8181/mesEquipment/queryByList/' + current + "/" + limit, this.equipmentCondition).then(function (resp) {
         console.log(resp.data.data)
         for (let i = 0; i < resp.data.data.length; i++) {
           let installDate = new Date(+new Date(resp.data.data[i].installDate) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')

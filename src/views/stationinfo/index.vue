@@ -1,6 +1,7 @@
 <template>
   <div>
-    <el-form :inline="true" :model="stationCondition" class="demo-form-inline" style="margin-top:20px;margin-left: 25px;">
+    <el-form :inline="true" :model="stationCondition" class="demo-form-inline"
+             style="margin-top:20px;margin-left: 25px;">
       <el-form-item label="工位名称">
         <el-autocomplete
           class="inline-input"
@@ -26,7 +27,7 @@
         <el-button type="primary" @click="handleInsert">新增工位</el-button>
       </el-form-item>
       <el-form-item>
-       <el-button type="danger" @click="deleteAll">批量删除</el-button>
+        <el-button type="danger" @click="deleteAll">批量删除</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -166,8 +167,8 @@ export default {
       limit: 10, // 每页记录数
       pages: '0', //总页码数
 
-      stationNameList:'',
-      stationCondition:{
+      stationNameList: '',
+      stationCondition: {
         stationName: '',
         status: ''
       },
@@ -191,8 +192,8 @@ export default {
     }
   },
   methods: {
-    onSubmit(){
-      this.fetchPageData(1,10);
+    onSubmit() {
+      this.fetchPageData(1, 10);
     },
     handleSelect(item) {
       console.log(item);
@@ -302,7 +303,7 @@ export default {
     },
     fetchPageData: function (current, limit) {
       const _this = this
-      this.$axios.post('http://localhost:8181/mesStation/queryByList/' + current + "/" + limit,this.stationCondition).then(function (resp) {
+      this.$axios.post('http://localhost:8181/mesStation/queryByList/' + current + "/" + limit, this.stationCondition).then(function (resp) {
         console.log(resp.data.data)
         _this.tableData = resp.data.data
         _this.total = resp.data.total

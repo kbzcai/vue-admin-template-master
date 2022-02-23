@@ -126,7 +126,7 @@ export default {
       limit: 10, // 每页记录数
       pages: '0', //总页码数
 
-      productNoList:'',
+      productNoList: '',
       productCondition: {
         productNo: ''
       },

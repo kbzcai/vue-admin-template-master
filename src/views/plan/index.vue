@@ -266,7 +266,7 @@ export default {
       current: 1, // 页码
       limit: 10, // 每页记录数
       pages: '0', //总页码数
-      planNoList:'',
+      planNoList: '',
       productForm: [{
         productNo: ''
       }],

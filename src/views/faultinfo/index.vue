@@ -14,10 +14,12 @@
         ></el-autocomplete>
       </el-form-item>
       <el-form-item>
-        <el-date-picker type="datetime" placeholder="选择开始日期" v-model="faultHistoryCondition.beginTime" :picker-options="pickerOptions"></el-date-picker>
+        <el-date-picker type="datetime" placeholder="选择开始日期" v-model="faultHistoryCondition.beginTime"
+                        :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-date-picker type="datetime" placeholder="选择结束日期" v-model="faultHistoryCondition.endTime"  :picker-options="pickerOptions"></el-date-picker>
+        <el-date-picker type="datetime" placeholder="选择结束日期" v-model="faultHistoryCondition.endTime"
+                        :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -140,7 +142,7 @@ export default {
       delarr: [],//存放删除的数据
       multipleSelection: [],//多选的数据
 
-      equipmentNoList:'',
+      equipmentNoList: '',
       faultHistoryCondition: {
         equipmentNo: '',
         beginTime: '',
