@@ -407,10 +407,7 @@ export default {
       this.finishFailForm = Object.assign({}, row);//将数据传入dialog页面
       this.finishFailForm.index = index;//传递当前index
     },
-    handleQuery: function (index, row) {
-      this.queryFormVisible = true;//dialog对话窗口打开
-      this.materialForm = Object.assign({}, row);//将数据传入dialog页面
-      this.materialForm.index = index;//传递当前index
+    handleQuery(){
       const _this = this
       this.$axios.get('http://localhost:8181/mesStation/queryAllStation').then(function (resp) {
         _this.stationForm = resp.data;

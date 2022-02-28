@@ -65,7 +65,7 @@ export const constantRoutes = [
     path: '/form',
     component: Layout,
     name: 'Form',
-    meta: {title: '物料管理', icon: 'el-icon-s-home'},
+    meta: {title: '物料管理', icon: 'el-icon-s-management'},
     children: [
       {
         path: 'product',
@@ -98,19 +98,19 @@ export const constantRoutes = [
         path: 'equipmentinfo',
         name: 'Equipmentinfo',
         component: () => import('@/views/equipmentinfo/index'),
-        meta: {title: '设备信息', icon: 'el-icon-s-claim'}
+        meta: {title: '设备信息', icon: 'el-icon-document'}
       },
       {
         path: 'faultinfo',
         name: 'Faultinfo',
         component: () => import('@/views/faultinfo/index'),
-        meta: {title: '故障信息', icon: 'el-icon-s-claim'}
+        meta: {title: '故障信息', icon: 'el-icon-error'}
       },
       {
         path: 'repairinfo',
         name: 'repairinfo',
         component: () => import('@/views/repairinfo/index'),
-        meta: {title: '维修信息', icon: 'el-icon-s-claim'}
+        meta: {title: '维修信息', icon: 'el-icon-first-aid-kit'}
       },
       {
         path: 'stationinfo',
@@ -137,13 +137,13 @@ export const constantRoutes = [
         path: 'stationonetstatus',
         name: 'stationonetstatus',
         component: () => import('@/views/stationonestatus/index'),
-        meta: {title: '线路1', icon: 'el-icon-s-flag'}
+        meta: {title: '线路1', icon: 'el-icon-data-analysis'}
       },
       {
         path: 'stationtwotstatus',
         name: 'stationtwotstatus',
         component: () => import('@/views/stationtwostatus/index'),
-        meta: {title: '线路2', icon: 'el-icon-s-flag'}
+        meta: {title: '线路2', icon: 'el-icon-data-analysis'}
       }
     ]
   },
