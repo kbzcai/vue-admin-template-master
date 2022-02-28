@@ -105,7 +105,9 @@
                class="edit-form">
       <el-form :model="insertForm" label-width="80px" ref="insertForm">
         <el-form-item label="工位号" prop="stationNo">
-          <el-input v-model="insertForm.stationNo" auto-complete="off"></el-input>
+          <el-select v-model="insertForm.stationNo" placeholder="选择工位">
+            <el-option v-for="(item,i) in stationForm" :label="item.stationName" :value="item.stationNo"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="设备编号" prop="equipmentNo">
           <el-input v-model="insertForm.equipmentNo" auto-complete="off"></el-input>
@@ -134,7 +136,7 @@
           <el-input v-model="editForm.stationNo" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="设备编号" prop="equipmentNo">
-          <el-input v-model="editForm.equipmentNo" auto-complete="off"></el-input>
+          <el-input v-model="editForm.equipmentNo" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="设备名称" prop="equipmentName">
           <el-input v-model="editForm.equipmentName" auto-complete="off"></el-input>
@@ -174,7 +176,7 @@
                class="edit-form">
       <el-form :model="reportFailForm" label-width="80px" ref="reportFailForm">
         <el-form-item label="设备号" prop="equipmentNo">
-          <el-input v-model="reportFailForm.equipmentNo" auto-complete="off" readonly="true"></el-input>
+          <el-input v-model="reportFailForm.equipmentNo" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="故障原因" prop="faultReason">
           <el-input v-model="reportFailForm.faultReason" auto-complete="off"></el-input>
@@ -197,7 +199,7 @@
                class="edit-form">
       <el-form :model="finishFailForm" label-width="80px" ref="finishFailForm">
         <el-form-item label="设备号" prop="equipmentNo">
-          <el-input v-model="finishFailForm.equipmentNo" auto-complete="off" readonly="true"></el-input>
+          <el-input v-model="finishFailForm.equipmentNo" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="维修内容" prop="repairContent">
           <el-input v-model="finishFailForm.repairContent" auto-complete="off"></el-input>
@@ -243,9 +245,14 @@ export default {
   },
   mounted() {
     this.queryAllEquipmentNo()
+    this.handleQuery()
   },
   data() {
     return {
+      stationForm: [{
+        stationNo: '',
+        stationName: ''
+      }],
       pickerOptions: {
         shortcuts: [{
           text: '今天',
@@ -367,7 +374,7 @@ export default {
       this.$axios.delete('http://localhost:8181/mesEquipment/deleteBySelectIds/' + this.delarr).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "删除成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert("删除失败")
         }
@@ -400,6 +407,15 @@ export default {
       this.finishFailForm = Object.assign({}, row);//将数据传入dialog页面
       this.finishFailForm.index = index;//传递当前index
     },
+    handleQuery: function (index, row) {
+      this.queryFormVisible = true;//dialog对话窗口打开
+      this.materialForm = Object.assign({}, row);//将数据传入dialog页面
+      this.materialForm.index = index;//传递当前index
+      const _this = this
+      this.$axios.get('http://localhost:8181/mesStation/queryAllStation').then(function (resp) {
+        _this.stationForm = resp.data;
+      })
+    },
     handleInsert() {
       this.insertFormVisible = true;
     },
@@ -429,7 +445,7 @@ export default {
       this.$axios.post('http://localhost:8181/mesEquipment/addEquipment', this.insertForm).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "添加成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert(resp.data)
         }
@@ -444,7 +460,7 @@ export default {
       this.$axios.put('http://localhost:8181/mesEquipment/updateEquipment', this.editForm).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "修改成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert("修改失败")
         }
@@ -456,7 +472,7 @@ export default {
       this.$axios.post('http://localhost:8181/mesEquipmentFaultHistory/addFaultHistory', this.reportFailForm).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "添加成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert("添加失败")
         }
@@ -468,7 +484,7 @@ export default {
       this.$axios.post('http://localhost:8181/mesEquipmentRepairHistory/addRepairHistory', this.finishFailForm).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "添加成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert("添加失败")
         }
@@ -511,7 +527,8 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     }
-  }
+  },
+  inject:['reload']
 }
 </script>
 <style scoped>

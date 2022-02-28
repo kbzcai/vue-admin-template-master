@@ -170,7 +170,7 @@
                class="edit-form">
       <el-form :model="editForm" label-width="80px" ref="editForm">
         <el-form-item label="计划号" prop="planNo">
-          <el-input v-model="editForm.planNo" auto-complete="off" readonly></el-input>
+          <el-input v-model="editForm.planNo" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="计划班次" prop="planSchedule">
           <el-select v-model="editForm.planSchedule" placeholder="选择班次">
@@ -391,7 +391,7 @@ export default {
         this.$axios.get('http://localhost:8181/mesPrimaryProducePlan/startPlanById/' + row.id).then(function (resp) {
           console.log(resp.data)
           if (resp.data == '开始生产') {
-            _this.$router.go(0);
+            _this.reload()
           } else {
             alert(resp.data);
           }
@@ -414,7 +414,7 @@ export default {
       this.$axios.delete('http://localhost:8181/mesPrimaryProducePlan/deleteBySelectIds/' + this.delarr).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "删除成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert("删除失败")
         }
@@ -427,7 +427,7 @@ export default {
       this.$axios.get('http://localhost:8181/mesPrimaryProducePlan/autoFillPlanById/' + this.autoFillId).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "补充成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert(resp.data)
         }
@@ -483,7 +483,7 @@ export default {
       this.$axios.post('http://localhost:8181/mesPrimaryProducePlan/addPlan', this.insertForm).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "添加成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert(resp.data)
         }
@@ -498,7 +498,7 @@ export default {
       this.$axios.put('http://localhost:8181/mesPrimaryProducePlan/updatePlan', this.editForm).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "修改成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert(resp.data)
         }
@@ -537,7 +537,8 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     }
-  }
+  },
+  inject:['reload']
 }
 </script>
 <style scoped>

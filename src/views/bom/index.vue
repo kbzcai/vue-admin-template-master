@@ -92,10 +92,10 @@
                class="edit-form">
       <el-form :model="editForm" label-width="80px" ref="editForm">
         <el-form-item label="物料编号" prop="materialNo">
-          <el-input v-model="editForm.materialNo" auto-complete="off" readonly></el-input>
+          <el-input v-model="editForm.materialNo" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="产品编号" prop="productNo">
-          <el-input v-model="editForm.productNo" auto-complete="off" readonly></el-input>
+          <el-input v-model="editForm.productNo" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="物料描述" prop="materialDesc">
           <el-input v-model="editForm.materialDesc" auto-complete="off"></el-input>
@@ -121,25 +121,25 @@
                class="edit-form">
       <el-form :model="materialForm" label-width="80px" ref="editForm">
         <el-form-item label="物料编号" prop="materialNo">
-          <el-input v-model="materialForm.materialNo" auto-complete="off" readonly></el-input>
+          <el-input v-model="materialForm.materialNo" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="产品编号" prop="productNo">
-          <el-input v-model="materialForm.productNo" auto-complete="off" readonly></el-input>
+          <el-input v-model="materialForm.productNo" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="物料描述" prop="materialDesc">
-          <el-input v-model="materialForm.materialDesc" auto-complete="off" readonly></el-input>
+          <el-input v-model="materialForm.materialDesc" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="工位" prop="stationName">
-          <el-input v-model="materialForm.stationName" auto-complete="off" readonly></el-input>
+          <el-input v-model="materialForm.stationName" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="数量(件)" prop="productNum">
-          <el-input v-model="materialForm.productNum" auto-complete="off" readonly></el-input>
+          <el-input v-model="materialForm.productNum" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="供应商" prop="manufacturer">
-          <el-input v-model="materialForm.manufacturer" auto-complete="off" readonly></el-input>
+          <el-input v-model="materialForm.manufacturer" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="重量(kg)" prop="productWeight">
-          <el-input v-model="materialForm.productWeight" auto-complete="off" readonly></el-input>
+          <el-input v-model="materialForm.productWeight" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -313,7 +313,7 @@ export default {
       this.$axios.delete('http://localhost:8181/mesBom/deleteBySelectIds/' + this.delarr).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "删除成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert("删除失败")
         }
@@ -381,7 +381,7 @@ export default {
       this.$axios.put('http://localhost:8181/mesBom/updateBom', this.editForm).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "修改成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert(resp.data)
         }
@@ -416,7 +416,8 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     }
-  }
+  },
+  inject:['reload']
 }
 </script>
 <style scoped>

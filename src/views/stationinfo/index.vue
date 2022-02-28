@@ -106,7 +106,7 @@
                class="edit-form">
       <el-form :model="editForm" label-width="80px" ref="editForm">
         <el-form-item label="工位号" prop="stationNo">
-          <el-input v-model="editForm.stationNo" auto-complete="off" readonly></el-input>
+          <el-input v-model="editForm.stationNo" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="工位名称" prop="stationName">
           <el-input v-model="editForm.stationName" auto-complete="off"></el-input>
