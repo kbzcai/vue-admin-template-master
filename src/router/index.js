@@ -129,7 +129,7 @@ export const constantRoutes = [
   {
     path: '/station',
     component: Layout,
-    redirect: '/station/stationinfo',
+    redirect: '/station/stationonetstatus',
     name: 'station',
     meta: {title: '工作线状态', icon: 'el-icon-s-platform'},
     children: [

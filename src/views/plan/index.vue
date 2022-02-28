@@ -351,6 +351,21 @@ export default {
       // 调用 callback 返回建议列表的数据
       cb(results);
     },
+    getProductPlan() {
+      const _this = this
+      this.$axios.get('http://localhost:8181/mesPrimaryProducePlan/getProductPlan').then(function (resp) {
+        console.log(resp.data.mes)
+        if (resp.data.mes == '查询成功') {
+          _this.nowPlanNo = resp.data.mesPrimaryProducePlan.planNo;
+          _this.nowPlanActualNum = resp.data.mesPrimaryProducePlan.actualNum
+          _this.nowPlanFailNum = resp.data.mesPrimaryProducePlan.failNum
+        } else {
+          _this.nowPlanNo = ''
+          _this.nowPlanActualNum = 0
+          _this.nowPlanFailNum = 0
+        }
+      })
+    },
     createFilter1(queryString) {
       return (planNoList) => {
         return (planNoList.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
