@@ -132,8 +132,10 @@
                :close-on-click-modal="false"
                class="edit-form">
       <el-form :model="editForm" label-width="80px" ref="editForm">
-        <el-form-item label="工位号" prop="stationNo">
-          <el-input v-model="editForm.stationNo" auto-complete="off"></el-input>
+        <el-form-item label="工位" prop="stationNo">
+          <el-select v-model="editForm.stationNo" placeholder="选择工位">
+            <el-option v-for="(item,i) in stationForm" :label="item.stationName" :value="item.stationNo"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="设备编号" prop="equipmentNo">
           <el-input v-model="editForm.equipmentNo" auto-complete="off" :disabled="true"></el-input>

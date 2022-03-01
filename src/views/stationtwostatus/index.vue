@@ -2,7 +2,7 @@
   <div>
     <img :src="require('@/assets/station_pic/station2.png')" width="100%" alt="">
     <slot name="content"/>
-    <div class="box">
+    <div v-for="(item,index) in viewArr" class="box">
       <div class="t_line_box">
         <i class="t_l_line"></i>
         <i class="l_t_line"></i>
@@ -20,159 +20,31 @@
         <i class="b_r_line"></i>
       </div>
       <div class="data">
-        <span class="title">工作站7</span>
-        <span class="result">A工位:{{ state7a == '1' ? '运行中' : state7a == '2' ? '待机' : state7a == '3' ? '报警' : '错误' }}
-        <template v-if="state7a == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state7a == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state7a == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template>
-        </span>
-        <span
-          class="result">B工位:{{ state7b == '1' ? '运行中' : state7b == '2' ? '待机' : state7b == '3' ? '报警' : '错误' }}
-         <template v-if="state7b == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state7b == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state7b == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template>
-        </span>
-      </div>
-    </div>
-    <div class="box">
-      <div class="t_line_box">
-        <i class="t_l_line"></i>
-        <i class="l_t_line"></i>
-      </div>
-      <div class="t_line_box">
-        <i class="t_r_line"></i>
-        <i class="r_t_line"></i>
-      </div>
-      <div class="t_line_box">
-        <i class="l_b_line"></i>
-        <i class="b_l_line"></i>
-      </div>
-      <div class="t_line_box">
-        <i class="r_b_line"></i>
-        <i class="b_r_line"></i>
-      </div>
-      <div class="data">
-        <span class="title">工作站8</span>
-        <span
-          class="result">A工位:{{ state8a == '1' ? '运行中' : state8a == '2' ? '待机' : state8a == '3' ? '报警' : '错误' }}
-         <template v-if="state8a == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state8a == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state8a == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-        <span
-          class="result">B工位:{{ state8b == '1' ? '运行中' : state8b == '2' ? '待机' : state8b == '3' ? '报警' : '错误' }}
-         <template v-if="state8b == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state8b == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state8b == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-      </div>
-    </div>
-    <div class="box">
-      <div class="t_line_box">
-        <i class="t_l_line"></i>
-        <i class="l_t_line"></i>
-      </div>
-      <div class="t_line_box">
-        <i class="t_r_line"></i>
-        <i class="r_t_line"></i>
-      </div>
-      <div class="t_line_box">
-        <i class="l_b_line"></i>
-        <i class="b_l_line"></i>
-      </div>
-      <div class="t_line_box">
-        <i class="r_b_line"></i>
-        <i class="b_r_line"></i>
-      </div>
-      <div class="data">
-        <span class="title">工作站9</span>
-        <span
-          class="result">A工位:{{ state9a == '1' ? '运行中' : state9a == '2' ? '待机' : state9a == '3' ? '报警' : '错误' }}
-         <template v-if="state9a == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state9a == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state9a == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-        <span
-          class="result">B工位:{{ state9b == '1' ? '运行中' : state9b == '2' ? '待机' : state9b == '3' ? '报警' : '错误' }}
-         <template v-if="state9b == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state9b == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state9b == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-      </div>
-    </div>
-    <div class="box">
-      <div class="t_line_box">
-        <i class="t_l_line"></i>
-        <i class="l_t_line"></i>
-      </div>
-      <div class="t_line_box">
-        <i class="t_r_line"></i>
-        <i class="r_t_line"></i>
-      </div>
-      <div class="t_line_box">
-        <i class="l_b_line"></i>
-        <i class="b_l_line"></i>
-      </div>
-      <div class="t_line_box">
-        <i class="r_b_line"></i>
-        <i class="b_r_line"></i>
-      </div>
-      <div class="data">
-        <span class="title">工作站10</span>
-        <span
-          class="result">A工位:{{ state10a == '1' ? '运行中' : state10a == '2' ? '待机' : state10a == '3' ? '报警' : '错误' }}
-         <template v-if="state10a == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state10a == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state10a == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-        <span
-          class="result">B工位:{{ state10b == '1' ? '运行中' : state10b == '2' ? '待机' : state10b == '3' ? '报警' : '错误' }}
-         <template v-if="state7a == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state7a == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state7a == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
+        <span class="title">工作站{{ index + 1 }}</span>
+        <span class="result">A工位:{{
+            item.stateA == '1' ? '运行中' : item.stateA == '2' ? '待机' : item.stateA == '3' ? '报警' : '错误'
+          }}
+           <template v-if="item.stateA == '1'">
+             <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+          </template>
+            <template v-else-if="item.stateA == '2'">
+             <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+          </template>
+            <template v-else-if="item.stateA == '3'">
+             <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+          </template></span>
+        <span class="result">B工位:{{
+            item.stateB == '1' ? '运行中' : item.stateB == '2' ? '待机' : item.stateB == '3' ? '报警' : '错误'
+          }}
+           <template v-if="item.stateB == '1'">
+             <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+          </template>
+            <template v-else-if="item.stateB == '2'">
+             <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+          </template>
+            <template v-else-if="item.stateB == '3'">
+             <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+          </template></span>
       </div>
     </div>
   </div>
@@ -189,14 +61,11 @@ export default {
   },
   data() {
     return {
-      state7a: '',
-      state7b: '',
-      state8a: '',
-      state8b: '',
-      state9a: '',
-      state9b: '',
-      state10a: '',
-      state10b: '',
+      viewArr: [
+        {stateA: '', stateB: ''},
+        {stateA: '', stateB: ''},
+        {stateA: '', stateB: ''},
+        {stateA: '', stateB: ''}]
     }
   },
   methods: {
@@ -204,16 +73,13 @@ export default {
       let _this = this
       this.$axios.get('http://localhost:8181/mesPlc/getStates').then(function (response) {
         console.log(response.data)
-        _this.state7a = response.data[6].stateA
-        _this.state7b = response.data[6].stateB
-        _this.state8a = response.data[7].stateA
-        _this.state8b = response.data[7].stateB
-        _this.state9a = response.data[8].stateA
-        _this.state9b = response.data[8].stateB
-        _this.state10a = response.data[9].stateA
-        _this.state10b = response.data[9].stateB
+        for (let i = 0; i < response.data.length; i++) {
+          if (_this.viewArr[i] != undefined) {
+            _this.viewArr[i].stateA = response.data[i].stateA
+            _this.viewArr[i].stateB = response.data[i].stateB
+          }
+        }
       })
-      console.log(this.state9a)
     }
   }
 }
