@@ -35,7 +35,7 @@
               <i class="b_r_line"></i>
             </div>
             <div class="data">
-              <span class="title">{{item.name}}</span>
+              <span class="title">{{ item.name }}</span>
               <span class="result">{{ item.value }}</span>
             </div>
           </div>
@@ -50,7 +50,7 @@
           <slot name="content"/>
           <div v-for="(item,index) in viewArr">
             <div class="plcData">
-              <span class="plc">工作站{{index+1}}——A工位：{{ item.numA }}
+              <span class="plc">工作站{{ index + 1 }}——A工位：{{ item.numA }}
                  <template v-if="item.stateA == '1'">
                    <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
                  </template>
@@ -63,7 +63,7 @@
               </span>
             </div>
             <div class="plcData">
-              <span class="plc">工作站{{index+1}}——B工位：{{ item.numB }}
+              <span class="plc">工作站{{ index + 1 }}——B工位：{{ item.numB }}
                  <template v-if="item.stateB == '1'">
                    <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
                  </template>
@@ -99,12 +99,12 @@ export default {
         {stateA: '', numA: '', stateB: '', numB: ''},
         {stateA: '', numA: '', stateB: '', numB: ''}],
       planArr: [
-        {name: '当日工作计划', value:'0'},
-        {name: '当周工作计划', value:'0'},
-        {name: '当月工作计划', value:'0'},
-        {name: '当日完成率', value:'0%'},
-        {name: '当周完成率', value:'0%'},
-        {name: '当月完成率', value:'0%'}]
+        {name: '当日工作计划', value: '0'},
+        {name: '当周工作计划', value: '0'},
+        {name: '当月工作计划', value: '0'},
+        {name: '当日完成率', value: '0%'},
+        {name: '当周完成率', value: '0%'},
+        {name: '当月完成率', value: '0%'}]
     }
   },
   created() {
@@ -116,14 +116,14 @@ export default {
     },
     open1() {
       let msg = ""
-      for (let i=0;i<this.viewArr.length;i++){
-        if(this.viewArr[i].stateA=='3'){
-          let num=i+1
-          msg+=num+"-A "
+      for (let i = 0; i < this.viewArr.length; i++) {
+        if (this.viewArr[i].stateA == '3') {
+          let num = i + 1
+          msg += num + "-A "
         }
-        if(this.viewArr[i].stateB=='3'){
-          let num=i+1
-          msg+=num+"-B "
+        if (this.viewArr[i].stateB == '3') {
+          let num = i + 1
+          msg += num + "-B "
         }
       }
       console.log(msg)
@@ -140,9 +140,9 @@ export default {
       this.$axios.get('http://localhost:8181/mesPlc/getNum').then(function (response) {
         console.log(response.data)
         for (let i = 6; i < response.data.length; i++) {
-          if (_this.viewArr[i-6] != undefined) {
-            _this.viewArr[i-6].numA = response.data[i].prodNumA
-            _this.viewArr[i-6].numB = response.data[i].prodNumB
+          if (_this.viewArr[i - 6] != undefined) {
+            _this.viewArr[i - 6].numA = response.data[i].prodNumA
+            _this.viewArr[i - 6].numB = response.data[i].prodNumB
           }
         }
         console.log(_this.viewArr)
@@ -150,9 +150,9 @@ export default {
       this.$axios.get('http://localhost:8181/mesPlc/getStates').then(function (response) {
         console.log(response.data)
         for (let i = 6; i < response.data.length; i++) {
-          if (_this.viewArr[i-6] != undefined) {
-            _this.viewArr[i-6].stateA = response.data[i].stateA
-            _this.viewArr[i-6].stateB = response.data[i].stateB
+          if (_this.viewArr[i - 6] != undefined) {
+            _this.viewArr[i - 6].stateA = response.data[i].stateA
+            _this.viewArr[i - 6].stateB = response.data[i].stateB
           }
         }
       })
@@ -169,14 +169,14 @@ export default {
       this.$axios.get('http://localhost:8181/mesPrimaryProducePlan/query').then(function (response) {
         console.log(response.data)
         for (let i = 0; i < 3; i++) {
-          if (_this.planArr[i] != undefined&&_this.planArr[i+3] != undefined) {
-            let planNum=response.data.planNumList[i]
+          if (_this.planArr[i] != undefined && _this.planArr[i + 3] != undefined) {
+            let planNum = response.data.planNumList[i]
             _this.planArr[i].value = planNum
-            let actualNum=response.data.actualNumList[i]
-            let failNum=response.data.failNumList[i]
+            let actualNum = response.data.actualNumList[i]
+            let failNum = response.data.failNumList[i]
             if (_this.planArr[i].value != 0 && actualNum != 0) {
-              _this.planArr[i+3].value = (Math.round((actualNum+ failNum) / planNum * 10000) / 100.00).toFixed(2) + "%"
-              console.log(planNum+","+actualNum+","+failNum)
+              _this.planArr[i + 3].value = (Math.round((actualNum + failNum) / planNum * 10000) / 100.00).toFixed(2) + "%"
+              console.log(planNum + "," + actualNum + "," + failNum)
             }
           }
         }
