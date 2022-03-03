@@ -158,149 +158,33 @@
             <span>设备产量</span>
           </div>
           <slot name="content"/>
-          <div id="plc1" class="plcData">
-            <span class="plc">工作站1——A工位：{{ plc1NumA }}
-             <template v-if="state1a == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state1a == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state1a == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-          </div>
-          <div id="plc2" class="plcData">
-            <span class="plc">工作站1——B工位：{{ plc1NumB }}
-            <template v-if="state1b == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state1b == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state1b == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-          </div>
-          <div id="plc3" class="plcData">
-            <span class="plc">工作站2——A工位：{{ plc2NumA }}
-            <template v-if="state2a == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state2a == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state2a == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-          </div>
-          <div id="plc4" class="plcData">
-            <span class="plc">工作站2——B工位：{{ plc2NumB }}
-            <template v-if="state2b == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state2b == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state2b == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-          </div>
-          <div id="plc5" class="plcData">
-            <span class="plc">工作站3——A工位：{{ plc3NumA }}
-            <template v-if="state3a == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state3a == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state3a == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-          </div>
-          <div id="plc6" class="plcData">
-            <span class="plc">工作站3——B工位：{{ plc3NumB }}
-            <template v-if="state3b == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state3b == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state3b == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-          </div>
-          <div id="plc7" class="plcData">
-            <span class="plc">工作站4——A工位：{{ plc4NumA }}
-            <template v-if="state4a == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state4a == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state4a == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-          </div>
-          <div id="plc8" class="plcData">
-            <span class="plc">工作站4——B工位：{{ plc4NumB }}
-            <template v-if="state4b == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state4b == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state4b == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-          </div>
-          <div id="plc9" class="plcData">
-            <span class="plc">工作站5——A工位：{{ plc5NumA }}
-            <template v-if="state5a == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state5a == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state5a == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-          </div>
-          <div id="plc10" class="plcData">
-            <span class="plc">工作站5——B工位：{{ plc5NumB }}
-            <template v-if="state5b == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state5b == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state5b == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-          </div>
-          <div id="plc11" class="plcData">
-            <span class="plc">工作站6——A工位：{{ plc6NumA }}
-            <template v-if="state6a == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state6a == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state6a == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
-          </div>
-          <div id="plc12" class="plcData">
-            <span class="plc">工作站6——B工位：{{ plc1NumB }}
-            <template v-if="state6b == '1'">
-           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
-        </template>
-          <template v-else-if="state6b == '2'">
-           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
-        </template>
-          <template v-else-if="state6b == '3'">
-           <img :src="require('@/assets/station_pic/redlight.png')" alt="">
-        </template></span>
+          <div v-for="(item,index) in viewArr">
+            <div class="plcData">
+              <span class="plc">工作站{{index+1}}——A工位：{{ item.numA }}
+                 <template v-if="item.stateA == '1'">
+                   <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+                 </template>
+                <template v-else-if="item.stateA == '2'">
+                  <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+                </template>
+                <template v-else-if="item.stateA == '3'">
+                  <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+                </template>
+              </span>
+            </div>
+            <div class="plcData">
+              <span class="plc">工作站{{index+1}}——B工位：{{ item.numB }}
+                 <template v-if="item.stateB == '1'">
+                   <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+                 </template>
+                <template v-else-if="item.stateB == '2'">
+                  <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+                </template>
+                <template v-else-if="item.stateB == '3'">
+                  <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+                </template>
+              </span>
+            </div>
           </div>
         </el-card>
       </el-col>
@@ -331,38 +215,13 @@ export default {
       dayPC: '0%',
       weekPC: '0%',
       monthPC: '0%',
-      plc1NumA: '0',
-      plc1NumB: '0',
-      plc2NumA: '0',
-      plc2NumB: '0',
-      plc3NumA: '0',
-      plc3NumB: '0',
-      plc4NumA: '0',
-      plc4NumB: '0',
-      plc5NumA: '0',
-      plc5NumB: '0',
-      plc6NumA: '0',
-      plc6NumB: '0',
-      plc7NumA: '0',
-      plc7NumB: '0',
-      plc8NumA: '0',
-      plc8NumB: '0',
-      plc9NumA: '0',
-      plc9NumB: '0',
-      plc10NumA: '0',
-      plc10NumB: '0',
-      state1a: '',
-      state1b: '',
-      state2a: '',
-      state2b: '',
-      state3a: '',
-      state3b: '',
-      state4a: '',
-      state4b: '',
-      state5a: '',
-      state5b: '',
-      state6a: '',
-      state6b: ''
+      viewArr: [
+        {stateA: '', numA: '', stateB: '', numB: ''},
+        {stateA: '', numA: '', stateB: '', numB: ''},
+        {stateA: '', numA: '', stateB: '', numB: ''},
+        {stateA: '', numA: '', stateB: '', numB: ''},
+        {stateA: '', numA: '', stateB: '', numB: ''},
+        {stateA: '', numA: '', stateB: '', numB: ''}]
     }
   },
   created() {
@@ -374,43 +233,17 @@ export default {
     },
     open1() {
       let msg = ""
-      console.log(this.state1a)
-      if (this.state1a == '3') {
-        msg += "1-A "
+      for (let i=0;i<this.viewArr.length;i++){
+        if(this.viewArr[i].stateA=='3'){
+          let num=i+1
+          msg+=num+"-A "
+        }
+        if(this.viewArr[i].stateB=='3'){
+          let num=i+1
+          msg+=num+"-B "
+        }
       }
-      if (this.state1b == '3') {
-        msg += "1-B "
-      }
-      if (this.state2a == '3') {
-        msg += "2-A "
-      }
-      if (this.state2b == '3') {
-        msg += "2-B "
-      }
-      if (this.state3a == '3') {
-        msg += "3-A "
-      }
-      if (this.state3b == '3') {
-        msg += "3-B "
-      }
-      if (this.state4a == '3') {
-        msg += "4-A "
-      }
-      if (this.state4b == '3') {
-        msg += "4-B "
-      }
-      if (this.state5a == '3') {
-        msg += "5-A "
-      }
-      if (this.state5b == '3') {
-        msg += "5-B "
-      }
-      if (this.state6a == '3') {
-        msg += "6-A "
-      }
-      if (this.state6b == '3') {
-        msg += "6-B"
-      }
+      console.log(msg)
       if (msg != "") {
         this.$notify({
           title: '提示',
@@ -423,41 +256,21 @@ export default {
       let _this = this
       this.$axios.get('http://localhost:8181/mesPlc/getNum').then(function (response) {
         console.log(response.data)
-        _this.plc1NumA = response.data[0].prodNumA
-        _this.plc1NumB = response.data[0].prodNumB
-        _this.plc2NumA = response.data[1].prodNumA
-        _this.plc2NumB = response.data[1].prodNumB
-        _this.plc3NumA = response.data[2].prodNumA
-        _this.plc3NumB = response.data[2].prodNumB
-        _this.plc4NumA = response.data[3].prodNumA
-        _this.plc4NumB = response.data[3].prodNumB
-        _this.plc5NumA = response.data[4].prodNumA
-        _this.plc5NumB = response.data[4].prodNumB
-        _this.plc6NumA = response.data[5].prodNumA
-        _this.plc6NumB = response.data[5].prodNumB
-        _this.plc7NumA = response.data[6].prodNumA
-        _this.plc7NumB = response.data[6].prodNumB
-        _this.plc8NumA = response.data[7].prodNumA
-        _this.plc8NumB = response.data[7].prodNumB
-        _this.plc9NumA = response.data[8].prodNumA
-        _this.plc9NumB = response.data[8].prodNumB
-        _this.plc10NumA = response.data[9].prodNumA
-        _this.plc10NumB = response.data[9].prodNumB
+        for (let i = 0; i < response.data.length; i++) {
+          if (_this.viewArr[i] != undefined) {
+            _this.viewArr[i].numA = response.data[i].prodNumA
+            _this.viewArr[i].numB = response.data[i].prodNumB
+          }
+        }
       })
       this.$axios.get('http://localhost:8181/mesPlc/getStates').then(function (response) {
         console.log(response.data)
-        _this.state1a = response.data[0].stateA
-        _this.state1b = response.data[0].stateB
-        _this.state2a = response.data[1].stateA
-        _this.state2b = response.data[1].stateB
-        _this.state3a = response.data[2].stateA
-        _this.state3b = response.data[2].stateB
-        _this.state4a = response.data[3].stateA
-        _this.state4b = response.data[3].stateB
-        _this.state5a = response.data[4].stateA
-        _this.state5b = response.data[4].stateB
-        _this.state6a = response.data[5].stateA
-        _this.state6b = response.data[5].stateB
+        for (let i = 0; i < response.data.length; i++) {
+          if (_this.viewArr[i] != undefined) {
+            _this.viewArr[i].stateA = response.data[i].stateA
+            _this.viewArr[i].stateB = response.data[i].stateB
+          }
+        }
       })
       this.open1()
     },
