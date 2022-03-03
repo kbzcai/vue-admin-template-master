@@ -17,7 +17,7 @@
             <span>计划数据</span>
           </div>
           <slot name="content"/>
-          <div class="box">
+          <div v-for="(item,index) in planArr" class="box">
             <div class="t_line_box">
               <i class="t_l_line"></i>
               <i class="l_t_line"></i>
@@ -35,118 +35,8 @@
               <i class="b_r_line"></i>
             </div>
             <div class="data">
-              <span class="title">当日工作计划</span>
-              <span class="result">{{ planDay }}</span>
-            </div>
-          </div>
-          <div class="box">
-            <div class="t_line_box">
-              <i class="t_l_line"></i>
-              <i class="l_t_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="t_r_line"></i>
-              <i class="r_t_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="l_b_line"></i>
-              <i class="b_l_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="r_b_line"></i>
-              <i class="b_r_line"></i>
-            </div>
-            <div class="data">
-              <span class="title">当周工作计划</span>
-              <span class="result">{{ planWeek }}</span>
-            </div>
-          </div>
-          <div class="box">
-            <div class="t_line_box">
-              <i class="t_l_line"></i>
-              <i class="l_t_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="t_r_line"></i>
-              <i class="r_t_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="l_b_line"></i>
-              <i class="b_l_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="r_b_line"></i>
-              <i class="b_r_line"></i>
-            </div>
-            <div class="data">
-              <span class="title">当月工作计划</span>
-              <span class="result">{{ planMonth }}</span>
-            </div>
-          </div>
-          <div class="box">
-            <div class="t_line_box">
-              <i class="t_l_line"></i>
-              <i class="l_t_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="t_r_line"></i>
-              <i class="r_t_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="l_b_line"></i>
-              <i class="b_l_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="r_b_line"></i>
-              <i class="b_r_line"></i>
-            </div>
-            <div class="data">
-              <span class="title">当日完成率</span>
-              <span class="result">{{ dayPC }}</span>
-            </div>
-          </div>
-          <div class="box">
-            <div class="t_line_box">
-              <i class="t_l_line"></i>
-              <i class="l_t_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="t_r_line"></i>
-              <i class="r_t_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="l_b_line"></i>
-              <i class="b_l_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="r_b_line"></i>
-              <i class="b_r_line"></i>
-            </div>
-            <div class="data">
-              <span class="title">当周完成率</span>
-              <span class="result">{{ weekPC }}</span>
-            </div>
-          </div>
-          <div class="box">
-            <div class="t_line_box">
-              <i class="t_l_line"></i>
-              <i class="l_t_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="t_r_line"></i>
-              <i class="r_t_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="l_b_line"></i>
-              <i class="b_l_line"></i>
-            </div>
-            <div class="t_line_box">
-              <i class="r_b_line"></i>
-              <i class="b_r_line"></i>
-            </div>
-            <div class="data">
-              <span class="title">当月完成率</span>
-              <span class="result">{{ monthPC }}</span>
+              <span class="title">{{item.name}}</span>
+              <span class="result">{{ item.value }}</span>
             </div>
           </div>
           <div id="chart3" :style="{height:'400px',marginTop: '20px'}"></div>
@@ -203,18 +93,13 @@ var echarts = require('echarts')
 export default {
   data() {
     return {
-      actualDay: 0,
-      actualWeek: 0,
-      actualMonth: 0,
-      planDay: 0,
-      planWeek: 0,
-      planMonth: 0,
-      failDay: 0,
-      failWeek: 0,
-      failMonth: 0,
-      dayPC: '0%',
-      weekPC: '0%',
-      monthPC: '0%',
+      planArr: [
+        {name: '当日工作计划', value:'0'},
+        {name: '当周工作计划', value:'0'},
+        {name: '当月工作计划', value:'0'},
+        {name: '当日完成率', value:'0%'},
+        {name: '当周完成率', value:'0%'},
+        {name: '当月完成率', value:'0%'}],
       viewArr: [
         {stateA: '', numA: '', stateB: '', numB: ''},
         {stateA: '', numA: '', stateB: '', numB: ''},
@@ -284,71 +169,18 @@ export default {
       let _this = this
       this.$axios.get('http://localhost:8181/mesPrimaryProducePlan/query').then(function (response) {
         console.log(response.data)
-        //合格数
-        if (response.data.actualNumList[0] == null) {
-          _this.actualDay = 0
-          console.log("为空")
-        } else {
-          _this.actualDay = response.data.actualNumList[0]
-        }
-        if (response.data.actualNumList[1] == null) {
-          _this.actualWeek = 0
-          console.log("为空")
-        } else {
-          _this.actualWeek = response.data.actualNumList[1]
-        }
-        if (response.data.actualNumList[2] == null) {
-          _this.actualMonth = 0
-          console.log("为空")
-        } else {
-          _this.actualMonth = response.data.actualNumList[2]
-        }
-        //计划数
-        if (response.data.planNumList[0] == null) {
-          _this.planDay = 0
-          console.log("为空")
-        } else {
-          _this.planDay = response.data.planNumList[0]
-        }
-        if (response.data.planNumList[1] == null) {
-          _this.planWeek = 0
-          console.log("为空")
-        } else {
-          _this.planWeek = response.data.planNumList[1]
-        }
-        if (response.data.planNumList[2] == null) {
-          _this.planMonth = 0
-          console.log("为空")
-        } else {
-          _this.planMonth = response.data.planNumList[2]
-        }
-        //手动焊接数
-        if (response.data.failNumList[0] == null) {
-          _this.failDay = 0
-          console.log("为空")
-        } else {
-          _this.failDay = response.data.failNumList[0]
-        }
-        if (response.data.failNumList[1] == null) {
-          _this.failWeek = 0
-          console.log("为空")
-        } else {
-          _this.failWeek = response.data.failNumList[1]
-        }
-        if (response.data.failNumList[2] == null) {
-          _this.failMonth = 0
-          console.log("为空")
-        } else {
-          _this.failMonth = response.data.failNumList[2]
-        }
-        if (_this.actualDay != 0 && _this.planDay != 0) {
-          _this.dayPC = (Math.round((_this.actualDay + _this.failDay) / _this.planDay * 10000) / 100.00).toFixed(2) + "%"
-        }
-        if (_this.actualWeek != 0 && _this.planWeek != 0) {
-          _this.weekPC = (Math.round((_this.actualWeek + _this.failWeek) / _this.planWeek * 10000) / 100.00).toFixed(2) + "%"
-        }
-        if (_this.actualMonth != 0 && _this.planMonth != 0) {
-          _this.monthPC = (Math.round((_this.actualMonth + _this.failMonth) / _this.planMonth * 10000) / 100.00).toFixed(2) + "%"
+        console.log(response.data)
+        for (let i = 0; i < 3; i++) {
+          if (_this.planArr[i] != undefined && _this.planArr[i + 3] != undefined) {
+            let planNum = response.data.planNumList[i]
+            _this.planArr[i].value = planNum
+            let actualNum = response.data.actualNumList[i]
+            let failNum = response.data.failNumList[i]
+            if (_this.planArr[i].value != 0 && actualNum != 0) {
+              _this.planArr[i + 3].value = (Math.round((actualNum + failNum) / planNum * 10000) / 100.00).toFixed(2) + "%"
+              console.log(planNum + "," + actualNum + "," + failNum)
+            }
+          }
         }
         _this.chart1.setOption({
           title: {
@@ -443,7 +275,7 @@ export default {
           },
           series: [
             {
-              name: '完成数量',
+              name: '合格数量',
               data: response.data.actualNumList,
               type: 'bar',
               showBackground: true,
