@@ -22,7 +22,7 @@
       <div class="data">
         <span class="title">工作站{{ index + 1 }}</span>
         <span class="result">A工位:{{
-            item.stateA == '1' ? '运行中' : item.stateA == '2' ? '待机' : item.stateA == '3' ? '报警' : '错误'
+            item.stateA == '1' ? '运行' : item.stateA == '2' ? '待机' : item.stateA == '3' ? '报警' : '错误'
           }}
            <template v-if="item.stateA == '1'">
              <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
@@ -34,7 +34,7 @@
              <img :src="require('@/assets/station_pic/redlight.png')" alt="">
           </template></span>
         <span class="result">B工位:{{
-            item.stateB == '1' ? '运行中' : item.stateB == '2' ? '待机' : item.stateB == '3' ? '报警' : '错误'
+            item.stateB == '1' ? '运行' : item.stateB == '2' ? '待机' : item.stateB == '3' ? '报警' : '错误'
           }}
            <template v-if="item.stateB == '1'">
              <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
@@ -90,7 +90,7 @@ export default {
   position: relative;
   text-align: center;
   overflow: hidden;
-  width: 300px;
+  width: 100%;
   height: 300px;
   padding: 0px;
   margin: 0px;
@@ -106,13 +106,13 @@ export default {
 .data .result {
   display: block;
   margin-top: 40px;
-  font-size: 35px;
+  font-size: 33px;
   font-family: '华文仿宋'
 }
 
 .box {
-  width: 16%;
-  margin-left: 6.5%;
+  width: 13%;
+  margin-left: 8%;
   height: 300px;
   margin-top: 30px;
   display: inline-block;
@@ -136,7 +136,7 @@ export default {
 
 .t_line_box {
   position: absolute;
-  width: 300px;
+  width: 13%;
   height: 300px;
 }
 

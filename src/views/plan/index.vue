@@ -49,7 +49,7 @@
       @selection-change="handleSelectionChange"
       highlight-current-row
       fit
-      style="width: 100%;margin-top:8px;min-height:500px"
+      style="width: 100%;margin-top:8px;min-height:700px"
       border
       :default-sort="{prop: 'date', order: 'descending'}"
     >

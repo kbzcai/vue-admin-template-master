@@ -61,7 +61,7 @@
               <span class="result">{{ planWeek }}</span>
             </div>
           </div>
-          <div class="box_right">
+          <div class="box">
             <div class="t_line_box">
               <i class="t_l_line"></i>
               <i class="l_t_line"></i>
@@ -127,7 +127,7 @@
               <span class="result">{{ weekPC }}</span>
             </div>
           </div>
-          <div class="box_right">
+          <div class="box">
             <div class="t_line_box">
               <i class="t_l_line"></i>
               <i class="l_t_line"></i>
@@ -686,7 +686,7 @@ export default {
   position: relative;
   text-align: center;
   overflow: hidden;
-  width: 250px;
+  width: 100%;
   height: 200px;
   padding: 0px;
   margin: 0px;
@@ -696,7 +696,7 @@ export default {
   display: block;
   margin-top: 40px;
   font-size: xx-large;
-  font-family: '华文仿宋'
+  font-family: '华文仿宋';
 }
 
 .data .result {
@@ -706,18 +706,11 @@ export default {
 }
 
 .box {
-  width: 250px;
-  height: 200px;
-  margin-right: 40px;
-  margin-top: 30px;
-  display: inline-block;
-}
-
-.box_right {
-  width: 250px;
+  width: 30%;
   height: 200px;
   margin-top: 30px;
   display: inline-block;
+  margin-left: 2.5%;
 }
 
 .l_t_line {
@@ -738,7 +731,7 @@ export default {
 
 .t_line_box {
   position: absolute;
-  width: 250px;
+  width: 13.8%;
   height: 200px;
 }
 
