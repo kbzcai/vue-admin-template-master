@@ -172,10 +172,19 @@ export default {
         console.log(response.data)
         for (let i = 0; i < 3; i++) {
           if (_this.planArr[i] != undefined && _this.planArr[i + 3] != undefined) {
-            let planNum = response.data.planNumList[i]
+            let planNum = 0
+            let actualNum = 0
+            let failNum = 0
+            if (response.data.planNumList[i] != null) {
+              planNum = response.data.planNumList[i]
+            }
             _this.planArr[i].value = planNum
-            let actualNum = response.data.actualNumList[i]
-            let failNum = response.data.failNumList[i]
+            if (response.data.planNumList[i] != null) {
+              actualNum = response.data.actualNumList[i]
+            }
+            if (response.data.planNumList[i] != null) {
+              failNum = response.data.failNumList[i]
+            }
             if (_this.planArr[i].value != 0 && actualNum != 0) {
               _this.planArr[i + 3].value = (Math.round((actualNum + failNum) / planNum * 10000) / 100.00).toFixed(2) + "%"
               console.log(planNum + "," + actualNum + "," + failNum)
