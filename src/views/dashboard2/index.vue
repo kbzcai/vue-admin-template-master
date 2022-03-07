@@ -173,6 +173,7 @@ export default {
             let planNum = 0
             let actualNum = 0
             let failNum = 0
+            let planWeldingFinishNum = 0
             if (response.data.planNumList[i] != null) {
               planNum = response.data.planNumList[i]
             }
@@ -183,9 +184,12 @@ export default {
             if (response.data.planNumList[i] != null) {
               failNum = response.data.failNumList[i]
             }
+            if (response.data.weldingFinishNumList[i] != null) {
+              planWeldingFinishNum = response.data.weldingFinishNumList[i]
+            }
             if (_this.planArr[i].value != 0 && actualNum != 0) {
-              _this.planArr[i + 3].value = (Math.round((actualNum + failNum) / planNum * 10000) / 100.00).toFixed(2) + "%"
-              console.log(planNum + "," + actualNum + "," + failNum)
+              _this.planArr[i + 3].value = (Math.round((actualNum + planWeldingFinishNum) / planNum * 10000) / 100.00).toFixed(2) + "%"
+              console.log(planNum + "," + actualNum + "," + planWeldingFinishNum + "," + failNum)
             }
           }
         }

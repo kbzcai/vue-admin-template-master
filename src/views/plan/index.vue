@@ -1,8 +1,5 @@
 <template>
   <div>
-    <span style="margin-top:20px;margin-left: 25px;font-size: 40px;">正在生产的计划：{{ this.nowPlanNo }}</span>
-    <span style="margin-top:20px;margin-left: 25px;font-size: 40px;">合格数：{{ this.nowPlanActualNum }}</span>
-    <span style="margin-top:20px;margin-left: 25px;font-size: 40px;">手动焊接数：{{ this.nowPlanFailNum }}</span>
     <el-form :inline="true" :model="planCondition" class="demo-form-inline"
              style="margin-top:20px;margin-left: 25px;">
       <el-form-item label="计划号">
@@ -184,8 +181,11 @@
         <el-form-item label="合格数量" prop="actualNum">
           <el-input v-model="editForm.actualNum" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="手动焊接数量" prop="failNum">
+        <el-form-item label="不合格数量" prop="actualNum">
           <el-input v-model="editForm.failNum" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="补焊合格数量" prop="failNum">
+          <el-input v-model="editForm.weldingFinishNum" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="计划日期" prop="planDate">
           <el-date-picker v-model="editForm.planDate" placeholder="选择计划日期" format="yyyy年MM月dd日"
@@ -244,14 +244,9 @@
 export default {
   created() {
     this.fetchPageData(1, 10);
-    this.getProductPlan();
-  },
-  destroyed() {
-    clearInterval(this.timer)
   },
   mounted() {
     this.queryAllPlanNo()
-    this.timer = setInterval(this.getProductPlan, 10000)
   },
   data() {
     return {
@@ -259,9 +254,6 @@ export default {
       msg: "",//记录每一条的信息，便于取id
       delarr: [],//存放删除的数据
       multipleSelection: [],//多选的数据
-      nowPlanNo: '',//正在生产的计划号
-      nowPlanActualNum: '',//正在生产的计划的合格数量
-      nowPlanFailNum: '',//正在生产的计划的手动焊接数量
       total: 0, // 总记录数
       current: 1, // 页码
       limit: 10, // 每页记录数
@@ -283,6 +275,7 @@ export default {
         planNo: '',
         productNo: '',
         planNum: '',
+        weldingFinishNum: '',
         actualNum: '',
         planStatus: '',
         status: ''
@@ -299,6 +292,7 @@ export default {
         planDate: '',
         planNum: '',
         actualNum: '',
+        weldingFinishNum: '',
         failNum: '',
         planSchedule: ''
       },
@@ -350,21 +344,6 @@ export default {
       let results = queryString ? planNoList.filter(this.createFilter1(queryString)) : planNoList;
       // 调用 callback 返回建议列表的数据
       cb(results);
-    },
-    getProductPlan() {
-      const _this = this
-      this.$axios.get('http://localhost:8181/mesPrimaryProducePlan/getProductPlan').then(function (resp) {
-        console.log(resp.data.mes)
-        if (resp.data.mes == '查询成功') {
-          _this.nowPlanNo = resp.data.mesPrimaryProducePlan.planNo;
-          _this.nowPlanActualNum = resp.data.mesPrimaryProducePlan.actualNum
-          _this.nowPlanFailNum = resp.data.mesPrimaryProducePlan.failNum
-        } else {
-          _this.nowPlanNo = ''
-          _this.nowPlanActualNum = 0
-          _this.nowPlanFailNum = 0
-        }
-      })
     },
     createFilter1(queryString) {
       return (planNoList) => {
@@ -538,7 +517,7 @@ export default {
       this.multipleSelection = val;
     }
   },
-  inject:['reload']
+  inject: ['reload']
 }
 </script>
 <style scoped>

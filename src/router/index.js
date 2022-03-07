@@ -62,6 +62,32 @@ export const constantRoutes = [
       ]
   },
   {
+    path: '/produce',
+    component: Layout,
+    name: 'Produce',
+    meta: {title: '生产管理', icon: 'el-icon-s-custom'},
+    children: [
+      {
+        path: 'workingPlan',
+        name: 'WorkingPlan',
+        component: () => import('@/views/workingPlan/index'),
+        meta: {title: '开始生产', icon: 'el-icon-s-order'}
+      },
+      {
+        path: 'plan',
+        name: 'Plan',
+        component: () => import('@/views/plan/index'),
+        meta: {title: '计划管理', icon: 'el-icon-s-order'}
+      },
+      {
+        path: 'unqualified',
+        name: 'Unqualified',
+        component: () => import('@/views/unqualified/index'),
+        meta: {title: '不合格品管理', icon: 'el-icon-s-order'}
+      }
+    ]
+  },
+  {
     path: '/form',
     component: Layout,
     name: 'Form',
@@ -78,12 +104,6 @@ export const constantRoutes = [
         name: 'Bom',
         component: () => import('@/views/bom/index'),
         meta: {title: '物料查询', icon: 'el-icon-search'}
-      },
-      {
-        path: 'plan',
-        name: 'Plan',
-        component: () => import('@/views/plan/index'),
-        meta: {title: '计划管理', icon: 'el-icon-s-order'}
       }
     ]
   },
