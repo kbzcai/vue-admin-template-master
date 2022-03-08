@@ -51,15 +51,15 @@ export const constantRoutes = [
       path: '/dashboard1',
       name: 'Dashboard1',
       component: () => import('@/views/dashboard1/index'),
-      meta: {title: '主看板1', icon: 'dashboard',roles:['admin']}
+      meta: {title: '主看板1', icon: 'dashboard', roles: ['admin']}
     },
       {
         path: '/dashboard2',
         name: 'Dashboard2',
         component: () => import('@/views/dashboard2/index'),
-        meta: {title: '主看板2', icon: 'dashboard',roles:['editor']}
+        meta: {title: '主看板2', icon: 'dashboard', roles: ['editor']}
       }
-      ]
+    ]
   },
   {
     path: '/produce',
@@ -71,19 +71,19 @@ export const constantRoutes = [
         path: 'workingPlan',
         name: 'WorkingPlan',
         component: () => import('@/views/workingPlan/index'),
-        meta: {title: '开始生产', icon: 'el-icon-s-order'}
+        meta: {title: '开始生产', icon: 'el-icon-monitor'}
       },
       {
         path: 'plan',
         name: 'Plan',
         component: () => import('@/views/plan/index'),
-        meta: {title: '计划管理', icon: 'el-icon-s-order'}
+        meta: {title: '计划管理', icon: 'el-icon-bangzhu'}
       },
       {
         path: 'unqualified',
         name: 'Unqualified',
         component: () => import('@/views/unqualified/index'),
-        meta: {title: '不合格品管理', icon: 'el-icon-s-order'}
+        meta: {title: '补焊管理', icon: 'el-icon-s-order'}
       }
     ]
   },

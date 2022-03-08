@@ -109,11 +109,11 @@
             size="mini"
             @click="handleEdit(scope.$index, scope.row)">编辑
           </el-button>
-          <el-button
-            size="mini"
-            v-if="scope.row.status != '1'&&scope.row.planStatus != '1'"
-            @click="startPlan(scope.$index, scope.row)">切换计划
-          </el-button>
+          <!--          <el-button-->
+          <!--            size="mini"-->
+          <!--            v-if="scope.row.status != '1'&&scope.row.planStatus != '1'"-->
+          <!--            @click="startPlan(scope.$index, scope.row)">切换计划-->
+          <!--          </el-button>-->
           <el-button
             size="mini"
             v-if="scope.row.planStatus != '1'"
