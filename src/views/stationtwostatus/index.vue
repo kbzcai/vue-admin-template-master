@@ -112,7 +112,7 @@ export default {
 
 .box {
   width: 13%;
-  margin-left: 8%;
+  margin-left: 9.5%;
   height: 300px;
   margin-top: 30px;
   display: inline-block;

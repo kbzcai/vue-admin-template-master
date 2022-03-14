@@ -14,10 +14,14 @@
         ></el-autocomplete>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">查询</el-button>
+        <el-button type="primary" @click="onSubmit"
+                   icon="el-icon-check">查询
+        </el-button>
       </el-form-item>
       <el-form-item>
-        <el-button type="danger" @click="deleteAll">批量删除</el-button>
+        <el-button type="danger" @click="deleteAll"
+                   icon="el-icon-delete ">批量删除
+        </el-button>
       </el-form-item>
       <el-form-item style="float: right">
         <el-upload
@@ -30,7 +34,9 @@
           :on-success="refresh"
           :limit="3"
           :on-exceed="handleExceed">
-          <el-button type="primary">导入BOM表</el-button>
+          <el-button type="primary"
+                     icon="el-icon-upload2">导入BOM表
+          </el-button>
         </el-upload>
       </el-form-item>
     </el-form>
@@ -63,10 +69,14 @@
           <!--          </el-button>-->
           <el-button
             size="mini"
+            round
+            icon="el-icon-view"
             @click="handleQuery(scope.$index, scope.row)">查看产品物料
           </el-button>
           <el-button
             size="mini"
+            round
+            icon="el-icon-delete"
             type="danger"
             @click="handleDelete(scope.$index, scope.row)">删除
           </el-button>

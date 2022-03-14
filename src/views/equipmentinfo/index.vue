@@ -22,13 +22,19 @@
                         :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">查询</el-button>
+        <el-button type="primary" @click="onSubmit"
+                   icon="el-icon-search">查询
+        </el-button>
       </el-form-item>
       <el-form-item>
-        <el-button type="danger" @click="deleteAll">批量删除</el-button>
+        <el-button type="danger" @click="deleteAll"
+                   icon="el-icon-delete">批量删除
+        </el-button>
       </el-form-item>
       <el-form-item style="float: right">
-        <el-button type="primary" @click="handleInsert">新增设备</el-button>
+        <el-button type="primary" @click="handleInsert"
+                   icon="el-icon-circle-plus-outline">新增设备
+        </el-button>
       </el-form-item>
     </el-form>
 
@@ -79,21 +85,32 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
+            round
+            type="warning"
+            icon="el-icon-edit"
             @click="handleEdit(scope.$index, scope.row)">编辑
           </el-button>
           <el-button
             size="mini"
             type="danger"
+            round
+            icon="el-icon-delete"
             @click="handleDelete(scope.$index, scope.row)">删除
           </el-button>
           <el-button
             size="mini"
             v-if="scope.row.equipmentStatus != '-1'"
+            icon="el-icon-warning-outline"
+            type="warning"
+            round
             @click="reportFail(scope.$index, scope.row)">报告故障
           </el-button>
           <el-button
             size="mini"
             v-if="scope.row.equipmentStatus == '-1'"
+            icon="el-icon-circle-check"
+            type="success"
+            round
             @click="finishFail(scope.$index, scope.row)">维修完成
           </el-button>
         </template>
@@ -409,7 +426,7 @@ export default {
       this.finishFailForm = Object.assign({}, row);//将数据传入dialog页面
       this.finishFailForm.index = index;//传递当前index
     },
-    handleQuery(){
+    handleQuery() {
       const _this = this
       this.$axios.get('http://localhost:8181/mesStation/queryAllStation').then(function (resp) {
         _this.stationForm = resp.data;
@@ -527,7 +544,7 @@ export default {
       this.multipleSelection = val;
     }
   },
-  inject:['reload']
+  inject: ['reload']
 }
 </script>
 <style scoped>

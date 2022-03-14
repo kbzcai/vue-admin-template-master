@@ -22,10 +22,10 @@
                         :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">查询</el-button>
+        <el-button type="primary" @click="onSubmit" icon="el-icon-search">查询</el-button>
       </el-form-item>
       <el-form-item>
-        <el-button type="danger" @click="deleteAll">批量删除</el-button>
+        <el-button type="danger" @click="deleteAll" icon="el-icon-delete">批量删除</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -69,6 +69,8 @@
           <el-button
             size="mini"
             type="danger"
+            round
+            icon="el-icon-delete"
             @click="handleDelete(scope.$index, scope.row)">删除
           </el-button>
         </template>

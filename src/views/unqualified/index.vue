@@ -22,7 +22,9 @@
                         :picker-options="pickerOptions"></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">查询</el-button>
+        <el-button type="primary" @click="onSubmit"
+                   icon="el-icon-search">查询
+        </el-button>
       </el-form-item>
     </el-form>
 
@@ -92,8 +94,10 @@
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <el-button
-            type="primary"
+            type="success"
             size="mini"
+            round
+            icon="el-icon-check"
             @click="handleFinish(scope.$index, scope.row)">补焊完成
           </el-button>
         </template>
@@ -219,7 +223,6 @@ export default {
         if (resp.data == "补焊成功") {
           _this.reload()
         } else {
-          alert(resp.data)
         }
       })
       this.delarr = [];

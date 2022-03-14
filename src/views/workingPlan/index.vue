@@ -16,7 +16,9 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="startPlan('selectForm')">切换计划</el-button>
+        <el-button type="primary" @click="startPlan('selectForm')"
+                   icon="el-icon-refresh">切换计划
+        </el-button>
       </el-form-item>
     </el-form>
     <div style="min-height: 700px;line-height: 700px;">
@@ -61,7 +63,7 @@ export default {
       const _this = this
       this.$axios.post('http://localhost:8181/mesPrimaryProducePlan/pass', {
         before: this.beforeForm.planNo,
-        enum:index
+        enum: index
       }).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "合格") {
