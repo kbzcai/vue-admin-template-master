@@ -121,6 +121,12 @@ export const constantRoutes = [
         meta: {title: '设备信息', icon: 'el-icon-document'}
       },
       {
+        path: 'plcinfo',
+        name: 'Plcinfo',
+        component: () => import('@/views/plcinfo/index'),
+        meta: {title: 'PLC信息', icon: 'el-icon-cpu'}
+      },
+      {
         path: 'faultinfo',
         name: 'Faultinfo',
         component: () => import('@/views/faultinfo/index'),
