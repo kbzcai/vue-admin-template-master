@@ -7,6 +7,7 @@
       height='200'
       highlight-current-row
       fit
+      width="100%"
       style="width: 100%;margin-top:8px;min-height:700px"
       border
       :default-sort="{prop: 'date', order: 'descending'}"
@@ -16,44 +17,44 @@
         label="PLC编号"
         align="center"
         sortable
-        width="180">
+        min-width="10%">
       </el-table-column>
       <el-table-column
         prop="r1_status"
         label="左工位状态"
         align="center"
         :formatter="stateFormat"
-        sortable
-        width="180">
+        min-width="20%"
+        sortable>
       </el-table-column>
       <el-table-column
         prop="r2_status"
         label="右工位状态"
         align="center"
+        min-width="20%"
         :formatter="stateFormat2"
-        sortable
-        width="180">
+        sortable>
       </el-table-column>
       <el-table-column
         prop="prod_numA"
         label="左工位数量"
+        min-width="10%"
         align="center"
-        sortable
-        width="180">
+        sortable>
       </el-table-column>
       <el-table-column
         prop="prod_numB"
         label="右工位数量"
+        min-width="10%"
         align="center"
-        sortable
-        width="180">
+        sortable>
       </el-table-column>
       <el-table-column
         prop="createTime"
         label="更新日期"
         align="center"
-        sortable
-        width="180">
+        min-width="30%"
+        sortable>
       </el-table-column>
     </el-table>
   </div>
