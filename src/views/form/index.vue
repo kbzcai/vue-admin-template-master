@@ -15,7 +15,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit"
-                   icon="el-icon-check">查询
+                   icon="el-icon-search">查询
         </el-button>
       </el-form-item>
       <el-form-item>

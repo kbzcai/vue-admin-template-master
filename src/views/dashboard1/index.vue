@@ -315,7 +315,7 @@ export default {
   },
   mounted() {
     this.initCharts()
-    this.timer = setInterval(this.getPlcData, 20000)
+    this.timer = setInterval(this.getPlcData, 5000)
   },
 }
 </script>
