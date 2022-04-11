@@ -73,10 +73,10 @@ export default {
       let _this = this
       this.$axios.get('http://localhost:8181/mesPlc/getStates').then(function (response) {
         console.log(response.data)
-        for (let i = 0; i < response.data.length; i++) {
-          if (_this.viewArr[i] != undefined) {
-            _this.viewArr[i].stateA = response.data[i].stateA
-            _this.viewArr[i].stateB = response.data[i].stateB
+        for (let i = 6; i < response.data.length - 5; i++) {
+          if (_this.viewArr[i - 6] != undefined) {
+            _this.viewArr[i - 6].stateA = response.data[i].stateA
+            _this.viewArr[i - 6].stateB = response.data[i].stateB
           }
         }
       })

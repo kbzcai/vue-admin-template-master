@@ -81,9 +81,7 @@
     </el-row>
     <div style="position: fixed;bottom: 60px;right: 50px; z-index: 100;cursor: pointer;">
       <span style="height:100px; line-height:100px; display:block; color:#FFF; text-align:center;">
-        <el-image :src="require('@/assets/station_pic/left.png')" alt="" @click="goto1">
-        </el-image>
-        <el-image :src="require('@/assets/station_pic/right.png')" alt="" @click="goto2">
+        <el-image :src="require('@/assets/station_pic/left.png')" alt="" @click="goto">
         </el-image>
       </span>
     </div>
@@ -96,6 +94,7 @@ export default {
   data() {
     return {
       viewArr: [
+        {stateA: '', numA: '', stateB: '', numB: ''},
         {stateA: '', numA: '', stateB: '', numB: ''},
         {stateA: '', numA: '', stateB: '', numB: ''},
         {stateA: '', numA: '', stateB: '', numB: ''},
@@ -113,11 +112,8 @@ export default {
     this.getPlcData();
   },
   methods: {
-    goto1() {
-      this.$router.push({path: '/dashboard1'})
-    },
-    goto2() {
-      this.$router.push({path: '/dashboard3'})
+    goto() {
+      this.$router.push({path: '/dashboard2'})
     },
     open1() {
       let msg = ""
@@ -144,20 +140,20 @@ export default {
       let _this = this
       this.$axios.get('http://localhost:8181/mesPlc/getNum').then(function (response) {
         console.log(response.data)
-        for (let i = 6; i < response.data.length - 5; i++) {
-          if (_this.viewArr[i - 6] != undefined) {
-            _this.viewArr[i - 6].numA = response.data[i].prodNumA
-            _this.viewArr[i - 6].numB = response.data[i].prodNumB
+        for (let i = 10; i < response.data.length; i++) {
+          if (_this.viewArr[i - 10] != undefined) {
+            _this.viewArr[i - 10].numA = response.data[i].prodNumA
+            _this.viewArr[i - 10].numB = response.data[i].prodNumB
           }
         }
         console.log(_this.viewArr)
       })
       this.$axios.get('http://localhost:8181/mesPlc/getStates').then(function (response) {
         console.log(response.data)
-        for (let i = 6; i < response.data.length - 5; i++) {
-          if (_this.viewArr[i - 6] != undefined) {
-            _this.viewArr[i - 6].stateA = response.data[i].stateA
-            _this.viewArr[i - 6].stateB = response.data[i].stateB
+        for (let i = 10; i < response.data.length; i++) {
+          if (_this.viewArr[i - 10] != undefined) {
+            _this.viewArr[i - 10].stateA = response.data[i].stateA
+            _this.viewArr[i - 10].stateB = response.data[i].stateB
           }
         }
       })

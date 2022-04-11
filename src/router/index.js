@@ -58,6 +58,12 @@ export const constantRoutes = [
         name: 'Dashboard2',
         component: () => import('@/views/dashboard2/index'),
         meta: {title: '主看板2', icon: 'dashboard', roles: ['editor']}
+      },
+      {
+        path: '/dashboard3',
+        name: 'Dashboard3',
+        component: () => import('@/views/dashboard3/index'),
+        meta: {title: '主看板3', icon: 'dashboard', roles: ['editor']}
       }
     ]
   },
@@ -170,6 +176,12 @@ export const constantRoutes = [
         name: 'stationtwotstatus',
         component: () => import('@/views/stationtwostatus/index'),
         meta: {title: '线路2', icon: 'el-icon-data-analysis'}
+      },
+      {
+        path: 'stationthreestatus',
+        name: 'stationthreestatus',
+        component: () => import('@/views/stationthreestatus/index'),
+        meta: {title: '线路3', icon: 'el-icon-data-analysis'}
       }
     ]
   },

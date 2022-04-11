@@ -81,7 +81,7 @@
     </el-row>
     <div style="position: fixed;bottom: 60px;right: 50px; z-index: 100;cursor: pointer;">
       <span style="height:100px; line-height:100px; display:block; color:#FFF; text-align:center;">
-        <el-image :src="require('@/assets/station_pic/qiehuan.png')" alt="" @click="goto">
+        <el-image :src="require('@/assets/station_pic/right.png')" alt="" @click="goto">
         </el-image>
       </span>
     </div>
@@ -141,7 +141,7 @@ export default {
       let _this = this
       this.$axios.get('http://localhost:8181/mesPlc/getNum').then(function (response) {
         console.log(response.data)
-        for (let i = 0; i < response.data.length; i++) {
+        for (let i = 0; i < response.data.length - 9; i++) {
           if (_this.viewArr[i] != undefined) {
             _this.viewArr[i].numA = response.data[i].prodNumA
             _this.viewArr[i].numB = response.data[i].prodNumB
@@ -150,7 +150,7 @@ export default {
       })
       this.$axios.get('http://localhost:8181/mesPlc/getStates').then(function (response) {
         console.log(response.data)
-        for (let i = 0; i < response.data.length; i++) {
+        for (let i = 0; i < response.data.length - 9; i++) {
           if (_this.viewArr[i] != undefined) {
             _this.viewArr[i].stateA = response.data[i].stateA
             _this.viewArr[i].stateB = response.data[i].stateB

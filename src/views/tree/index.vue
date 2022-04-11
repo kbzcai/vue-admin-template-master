@@ -81,6 +81,21 @@ export default {
       }, {
         value: 10,
         label: '设备十'
+      }, {
+        value: 11,
+        label: '设备十一'
+      }, {
+        value: 12,
+        label: '设备十二'
+      }, {
+        value: 13,
+        label: '设备十三'
+      }, {
+        value: 14,
+        label: '设备十四'
+      }, {
+        value: 15,
+        label: '设备十五'
       }],
       value: 1,  // 选取默认值在里面就可以了，比如：  value:"选项2"；
       switchValue: '电压',
