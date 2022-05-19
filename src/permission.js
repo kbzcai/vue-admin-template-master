@@ -39,6 +39,8 @@ router.beforeEach(async(to, from, next) => {
             next({ path: '/dashboard1' })
           if(hasToken == "editor-token")
             next({ path: '/dashboard2' })
+          if(hasToken == "visitor-token")
+            next({ path: '/dashboard3' })
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

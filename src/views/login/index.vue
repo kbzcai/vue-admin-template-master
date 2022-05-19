@@ -47,7 +47,7 @@
       </el-button>
 
       <div class="tips">
-        <span> 默认线账号如下，设置账号只是为了点击登录后默认显示该线信息，账号本身并无任何作用</span>
+        <span>设置账号只是为了每次打开网页默认显示该线路信息，账号本身并无任何作用</span>
       </div>
       <div class="tips">
         <span style="margin-right:20px;">1-6号站线路</span>
@@ -57,6 +57,11 @@
       <div class="tips">
         <span style="margin-right:20px;">7-10号站线路</span>
         <span style="margin-right:20px;">用户名: editor</span>
+        <span> 密码: 6位以下任意</span>
+      </div>
+      <div class="tips">
+        <span style="margin-right:20px;">11-15号站线路</span>
+        <span style="margin-right:20px;">用户名: visitor</span>
         <span> 密码: 6位以下任意</span>
       </div>
     </el-form>
@@ -136,6 +141,8 @@ export default {
               this.$router.push({path: '/dashboard1'})
             } else if (this.loginForm.username == "editor") {
               this.$router.push({path: '/dashboard2'})
+            } else if (this.loginForm.username == "visitor") {
+              this.$router.push({path: '/dashboard3'})
             }
 
             this.this.loading = false
