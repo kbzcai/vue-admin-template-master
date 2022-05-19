@@ -179,7 +179,7 @@ export default {
       this.$axios.delete('http://localhost:8181/mesEquipmentFaultHistory/deleteBySelectIds/' + this.delarr).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "删除成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert("删除失败")
         }
@@ -244,7 +244,8 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     }
-  }
+  },
+  inject:['reload']
 
   // this.$confirm('此操作将任务状态改为删除状态, 是否继续?', '提示', {
   //   confirmButtonText: '确定',

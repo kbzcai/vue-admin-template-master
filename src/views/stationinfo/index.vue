@@ -237,7 +237,7 @@ export default {
       this.$axios.delete('http://localhost:8181/mesStation/deleteBySelectIds/' + this.delarr).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "删除成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert("删除失败")
         }
@@ -280,7 +280,7 @@ export default {
       this.$axios.post('http://localhost:8181/mesStation/addStation', this.insertForm).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "添加成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert(resp.data)
         }
@@ -295,7 +295,7 @@ export default {
       this.$axios.put('http://localhost:8181/mesStation/updateStation', this.editForm).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "修改成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert("修改失败")
         }
@@ -330,7 +330,8 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     }
-  }
+  },
+  inject:['reload']
 }
 </script>
 <style scoped>

@@ -12,7 +12,7 @@
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <el-dropdown-item divided @click.native="logout">
-            <span style="display:block;">切换显示看板</span>
+            <span style="display:block;">切换默认看板</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>

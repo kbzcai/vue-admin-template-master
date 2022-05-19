@@ -86,7 +86,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '111111'
+        password: '123456'
       },
       loginRules: {
         username: [{required: true, trigger: 'blur', validator: validateUsername}],
@@ -120,18 +120,31 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+          // const _this=this
+          // this.$axios.post('http://localhost:8181/sysUser/login/'+this.loginForm.username+"/"+this.loginForm.password).then(resp=>{
+          //  console.log(resp.data)
+          //   if(resp.data=="登录成功"){
+          //     _this.$router.push({path: '/dashboard1'})
+          //     _this.loading=false
+          //   }else {
+          //     alert(resp.data)
+          //     _this.loading=false
+          //   }
+          // })
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             if (this.loginForm.username == "admin") {
               this.$router.push({path: '/dashboard1'})
             } else if (this.loginForm.username == "editor") {
               this.$router.push({path: '/dashboard2'})
             }
+
             this.this.loading = false
           }).catch(() => {
             this.loading = false
           })
         } else {
           console.log('error submit!!')
+          _this.loading=false
           return false
         }
       })
