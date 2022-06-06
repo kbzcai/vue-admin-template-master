@@ -207,7 +207,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click.native="handleCancel('reportFailForm')">取消</el-button>
+        <el-button @click.native="handleCancel1('reportFailForm')">取消</el-button>
         <el-button type="primary" @click.native="reportFailInsert('reportFailForm')">确认</el-button>
       </div>
     </el-dialog>
@@ -230,7 +230,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click.native="handleCancel('finishFailForm')">取消</el-button>
+        <el-button @click.native="handleCancel2('finishFailForm')">取消</el-button>
         <el-button type="primary" @click.native="finishFailInsert('finishFailForm')">确认</el-button>
       </div>
     </el-dialog>
@@ -452,6 +452,12 @@ export default {
     //取消
     handleCancel(formName) {
       this.editFormVisible = false;
+    },
+    handleCancel1(formName) {
+      this.reportFailFormVisible = false;
+    },
+    handleCancel2(formName) {
+      this.finishFailFormVisible = false;
     },
     //新增
     Insert(forName) {

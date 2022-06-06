@@ -179,7 +179,7 @@ export default {
       })
     },
     refresh(response, file, fileList) {
-      this.$router.go(0);
+      this.reload()
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -212,7 +212,7 @@ export default {
       this.$axios.delete('http://localhost:8181/mesProduct/deleteBySelectIds/' + this.delarr).then(function (resp) {
         console.log(resp.data)
         if (resp.data == "删除成功") {
-          _this.$router.go(0);
+          _this.reload()
         } else {
           alert("删除失败")
         }
@@ -278,7 +278,8 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     }
-  }
+  },
+  inject:['reload']
 }
 </script>
 <style scoped>

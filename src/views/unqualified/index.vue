@@ -105,7 +105,7 @@
     </el-table>
 
     <el-dialog title="提示" :visible.sync="finishVisible" width="300px" center>
-      <div class="del-dialog-cnt">确定该计划已经全部补焊完成吗？</div>
+      <div class="del-dialog-cnt">确定该计划已经全部补焊完成吗？(确认后补焊数量会增加至完成数量中)</div>
       <span slot="footer" class="dialog-footer">
       <el-button @click="finishVisible = false">取 消</el-button>
       <el-button type="primary" @click="finishRow">确 定</el-button>

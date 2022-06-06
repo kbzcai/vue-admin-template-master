@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="require('@/assets/station_pic/station2.png')" width="100%" alt="">
+    <img :src="require('@/assets/station_pic/station3.png')" width="100%" alt="">
     <slot name="content"/>
     <div v-for="(item,index) in viewArr" class="box">
       <div class="t_line_box">
