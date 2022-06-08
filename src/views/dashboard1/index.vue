@@ -52,26 +52,26 @@
             <div class="plcData">
               <span class="plc">工作站{{ index + 1 }}——A工位：{{ item.numA }}
                  <template v-if="item.stateA == '1'">
-                   <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+                   <img :src="require('@/assets/station_pic/green_light.png')" alt="">
                  </template>
                 <template v-else-if="item.stateA == '2'">
-                  <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+                  <img :src="require('@/assets/station_pic/yellow_light.gif')" alt="">
                 </template>
                 <template v-else-if="item.stateA == '3'">
-                  <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+                  <img :src="require('@/assets/station_pic/red_light.gif')" alt="">
                 </template>
               </span>
             </div>
             <div class="plcData">
               <span class="plc">工作站{{ index + 1 }}——B工位：{{ item.numB }}
                  <template v-if="item.stateB == '1'">
-                   <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+                   <img :src="require('@/assets/station_pic/green_light.png')" alt="">
                  </template>
                 <template v-else-if="item.stateB == '2'">
-                  <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+                  <img :src="require('@/assets/station_pic/yellow_light.gif')" alt="">
                 </template>
                 <template v-else-if="item.stateB == '3'">
-                  <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+                  <img :src="require('@/assets/station_pic/red_light.gif')" alt="">
                 </template>
               </span>
             </div>

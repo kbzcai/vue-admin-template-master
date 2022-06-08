@@ -24,23 +24,23 @@
     <!--        <span class="title">工作站1</span>-->
     <!--        <span class="result">A工位:{{ state1a == '1' ? '运行中' : state1a == '2' ? '待机' : state1a == '3' ? '报警' : '错误' }}-->
     <!--         <template v-if="state1a == '1'">-->
-    <!--           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">-->
+    <!--           <img :src="require('@/assets/station_pic/green_light.png')" alt="">-->
     <!--        </template>-->
     <!--          <template v-else-if="state1a == '2'">-->
-    <!--           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">-->
+    <!--           <img :src="require('@/assets/station_pic/yellow_light.gif')" alt="">-->
     <!--        </template>-->
     <!--          <template v-else-if="state1a == '3'">-->
-    <!--           <img :src="require('@/assets/station_pic/redlight.png')" alt="">-->
+    <!--           <img :src="require('@/assets/station_pic/red_light.gif')" alt="">-->
     <!--        </template></span>-->
     <!--        <span class="result">B工位:{{ state1b == '1' ? '运行中' : state1b == '2' ? '待机' : state1b == '3' ? '报警' : '错误' }}-->
     <!--         <template v-if="state1b == '1'">-->
-    <!--           <img :src="require('@/assets/station_pic/greenlight.png')" alt="">-->
+    <!--           <img :src="require('@/assets/station_pic/green_light.png')" alt="">-->
     <!--        </template>-->
     <!--          <template v-else-if="state1b == '2'">-->
-    <!--           <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">-->
+    <!--           <img :src="require('@/assets/station_pic/yellow_light.gif')" alt="">-->
     <!--        </template>-->
     <!--          <template v-else-if="state1b == '3'">-->
-    <!--           <img :src="require('@/assets/station_pic/redlight.png')" alt="">-->
+    <!--           <img :src="require('@/assets/station_pic/red_light.gif')" alt="">-->
     <!--        </template></span>-->
     <!--      </div>-->
     <!--    </div>-->
@@ -68,25 +68,25 @@
             item.stateA == '1' ? '运行' : item.stateA == '2' ? '待机' : item.stateA == '3' ? '报警' : '错误'
           }}
            <template v-if="item.stateA == '1'">
-             <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+             <img :src="require('@/assets/station_pic/green_light.png')" alt="">
           </template>
             <template v-else-if="item.stateA == '2'">
-             <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+             <img :src="require('@/assets/station_pic/yellow_light.gif')" alt="">
           </template>
             <template v-else-if="item.stateA == '3'">
-             <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+             <img :src="require('@/assets/station_pic/red_light.gif')" alt="">
           </template></span>
         <span class="result">B工位:{{
             item.stateB == '1' ? '运行' : item.stateB == '2' ? '待机' : item.stateB == '3' ? '报警' : '错误'
           }}
            <template v-if="item.stateB == '1'">
-             <img :src="require('@/assets/station_pic/greenlight.png')" alt="">
+             <img :src="require('@/assets/station_pic/green_light.png')" alt="">
           </template>
             <template v-else-if="item.stateB == '2'">
-             <img :src="require('@/assets/station_pic/yellowlight.png')" alt="">
+             <img :src="require('@/assets/station_pic/yellow_light.gif')" alt="">
           </template>
             <template v-else-if="item.stateB == '3'">
-             <img :src="require('@/assets/station_pic/redlight.png')" alt="">
+             <img :src="require('@/assets/station_pic/red_light.gif')" alt="">
           </template></span>
       </div>
     </div>
