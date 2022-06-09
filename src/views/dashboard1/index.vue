@@ -60,6 +60,9 @@
                 <template v-else-if="item.stateA == '3'">
                   <img :src="require('@/assets/station_pic/red_light.gif')" alt="">
                 </template>
+                <template v-else>
+                  <img :src="require('@/assets/station_pic/gray_light.png')" alt="">
+                </template>
               </span>
             </div>
             <div class="plcData">
@@ -72,6 +75,9 @@
                 </template>
                 <template v-else-if="item.stateB == '3'">
                   <img :src="require('@/assets/station_pic/red_light.gif')" alt="">
+                </template>
+                  <template v-else>
+                  <img :src="require('@/assets/station_pic/gray_light.png')" alt="">
                 </template>
               </span>
             </div>

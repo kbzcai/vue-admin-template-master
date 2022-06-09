@@ -32,7 +32,10 @@
           </template>
             <template v-else-if="item.stateA == '3'">
              <img :src="require('@/assets/station_pic/red_light.gif')" alt="">
-          </template></span>
+          </template>
+          <template v-else>
+                  <img :src="require('@/assets/station_pic/gray_light.png')" alt="">
+                </template></span>
         <span class="result">B工位:{{
             item.stateB == '1' ? '运行' : item.stateB == '2' ? '待机' : item.stateB == '3' ? '报警' : '错误'
           }}
@@ -44,7 +47,10 @@
           </template>
             <template v-else-if="item.stateB == '3'">
              <img :src="require('@/assets/station_pic/red_light.gif')" alt="">
-          </template></span>
+          </template>
+          <template v-else>
+                  <img :src="require('@/assets/station_pic/gray_light.png')" alt="">
+                </template></span>
       </div>
     </div>
   </div>
